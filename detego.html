@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Detego, the cultural pillar of REDES, brings art and heritage to light through digital solutions, interactive experiences, and AI-powered cultural preservation. We create meaningful connections between artifacts, stories, and audiences worldwide.">
+  <meta name="keywords" content="Detego, cultural preservation, digital art, art galleries, cultural experiences, AI in art, cultural heritage, events planning, online education, REDES, art digitalization">
+  <meta name="author" content="REDES">
+  <title>Detego | Cultural Heritage Reimagined - REDES</title>
+  <!-- google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Manrope:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="./assets/img/favicon.png">
+	<link rel="stylesheet" type="text/css" href="./assets/fonts/unicons/unicons.css">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+  <link rel="stylesheet" href="./assets/css/plugins.css">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./assets/css/colors/grape.css">
+  <link rel="preload" href="./assets/css/fonts/space.css" as="style" onload="this.rel='stylesheet'">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Add Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Add p5.js for the strings effect -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+  <style>
+  .swiper-container.nav-color .swiper-button, .swiper-container.nav-color .swiper-slide figure .item-link {
+      background: #605dbae6 !important;
+      color: #fff !important;
+  }
+  .swiper-container.nav-color .swiper-button:hover, .swiper-container.nav-color .swiper-slide figure .item-link:hover {
+      background: #605dba !important;
+  }
+  @media (max-width: 991.98px){
+      .navbar-expand-lg .navbar-collapse .dropdown-toggle:after {
+        color: #ffffff !important;
+      }
+  }
+  .font-serif {
+    font-family: 'Playfair Display', serif;
+  }
+  
+  /* Font Awesome icon styling */
+  .fas {
+    display: inline-block !important;
+    text-align: center;
+    width: 2.6rem !important;
+    height: 2.6rem !important;
+    line-height: 2.6rem !important;
+    font-size: 2.6rem !important;
+  }
+  
+  .card .fas {
+    margin-bottom: 0.75rem;
+  }
+  
+  /* Methodology section icons */
+  .process-wrapper .fas {
+    margin: 0 auto;
+    margin-bottom: 0.75rem;
+  }
+  
+  /* Particles.js specific styling */
+  #particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    pointer-events: auto;
+  }
+  
+  /* Ensure content appears above particles */
+  .relative-z-10 {
+    position: relative;
+    z-index: 10;
+  }
+  
+  /* Gradient animation for REDES text */
+  .animate-gradient {
+    background-size: 300%;
+    -webkit-animation: animatedgradient 6s ease infinite alternate;
+    -moz-animation: animatedgradient 6s ease infinite alternate;
+    animation: animatedgradient 6s ease infinite alternate;
+  }
+
+  @keyframes animatedgradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* Fix for Unicons icons */
+  .uil {
+    font-family: 'Unicons' !important;
+  }
+  .uil-arrow-right:before {
+    content: "\e949";
+  }
+  
+  /* Navigation arrows for swiper */
+  .swiper-button-prev .uil-angle-left:before {
+    content: "\e93e";
+  }
+  .swiper-button-next .uil-angle-right:before {
+    content: "\e93f";
+  }
+  
+  /* Override default swiper button styling */
+  .swiper-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+  
+  /* Updated CSS for strings container in hero section */
+  #strings-canvas-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Above background but below hero content */
+    pointer-events: none;
+    background-color: rgba(0, 0, 0, 0.4); /* Lighter background */
+  }
+  
+  /* Add CSS for the background container */
+  #canvas-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Behind everything */
+    pointer-events: none;
+    background-color: #0c1445;
+  }
+  
+  /* Add before pseudo-element to create a gradient overlay */
+  #hero:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
+    z-index: 0; /* Below the strings effect */
+  }
+  
+  .overlay-content {
+    position: relative;
+    z-index: 10;
+  }
+  
+  /* Navbar styling with white background */
+  .navbar {
+    padding: 0.33rem 0;
+    border-bottom: 0.5px solid rgba(164, 174, 198, 0.2);
+  }
+  
+  /* Add some space between navbar and hero section */
+  #hero {
+    padding-top: 20px; /* Add space for the navbar */
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Add this to ensure all wrapper sections have proper background coverage */
+  .wrapper {
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Ensure white backgrounds are fully opaque */
+  .wrapper.\!bg-\[#ffffff\] {
+    background-color: #ffffff !important;
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Ensure colored backgrounds are fully opaque */
+  .wrapper.\!bg-\[#edf2fc\] {
+    background-color: #edf2fc !important;
+    position: relative;
+    z-index: 1;
+  }
+</style>
+</head>
+
+<body>
+  <div class="grow shrink-0">
+    <header class="!absolute w-full">
+      <nav class="navbar navbar-expand-lg center-nav navbar-light relative z-20 bg-white shadow-sm">
+        <div class="container xl:flex-row lg:flex-row !flex-nowrap items-center">
+          <div class="navbar-brand w-full">
+            <a href="./home.html">
+              <img src="./assets/img/redes-logo.png" srcset="./assets/img/redes-logo.png 4x" alt="image">
+            </a>
+          </div>
+          <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
+            <div class="offcanvas-header xl:hidden lg:hidden flex items-center justify-between flex-row p-6">
+              <h3 class="text-white xl:text-[1.5rem] !text-[calc(1.275rem_+_0.3vw)] !mb-0">Redes</h3>
+              <button type="button" class="btn-close btn-close-white mr-[-0.75rem] m-0 p-0 leading-none text-[#343f52] transition-all duration-[0.2s] ease-in-out border-0 motion-reduce:transition-none before:text-[1.05rem] before:content-['\ed3b'] before:w-[1.8rem] before:h-[1.8rem] before:leading-[1.8rem] before:shadow-none before:transition-[background] before:duration-[0.2s] before:ease-in-out before:flex before:justify-center before:items-center before:m-0 before:p-0 before:rounded-[100%] hover:no-underline bg-inherit before:bg-[rgba(255,255,255,.08)] before:font-Unicons hover:before:bg-[rgba(0,0,0,.11)] focus:outline-0" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body xl:!ml-auto lg:!ml-auto flex flex-col !h-full">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link font-bold tracking-[-0.01rem] text-[#343f52] hover:!text-[#605dba]" href="home.html">Redes</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link font-bold tracking-[-0.01rem] text-[#343f52] hover:!text-[#605dba]" href="rethink.html">Rethink</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link font-bold tracking-[-0.01rem] text-[#343f52] hover:!text-[#605dba]" href="detego.html">Detego</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link font-bold tracking-[-0.01rem] text-[#343f52] hover:!text-[#605dba]" href="sophia.html">Sophia</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link font-bold tracking-[-0.01rem] text-[#343f52] hover:!text-[#605dba]" href="about.html">Meet Us</a>
+                </li>
+              </ul>
+              <!-- /.navbar-nav -->
+              <div class="offcanvas-footer xl:hidden lg:hidden">
+                <div>
+                  <a href="mailto:hello@redeslabs.com" class="link-inverse">hello@redeslabs.com</a>
+                  <nav class="nav social social-white mt-4">
+                  <a class="text-[#cacaca] text-[1rem] transition-all duration-[0.2s] ease-in-out translate-y-0 motion-reduce:transition-none hover:translate-y-[-0.15rem] m-[0_.7rem_0_0]" href="#" aria-label="X">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5549 21H20.7996L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z"/></svg>
+                  </a>
+                  <a class="text-[#cacaca] text-[1rem] transition-all duration-[0.2s] ease-in-out translate-y-0 motion-reduce:transition-none hover:translate-y-[-0.15rem] m-[0_.7rem_0_0]" href="#" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg>
+                  </a>
+                  <a class="text-[#cacaca] text-[1rem] transition-all duration-[0.2s] ease-in-out translate-y-0 motion-reduce:transition-none hover:translate-y-[-0.15rem] m-[0_.7rem_0_0]" href="#" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"/></svg>
+                  </a>
+                  </nav>
+                  <!-- /.social -->
+                </div>
+              </div>
+              <!-- /.offcanvas-footer -->
+            </div>
+            <!-- /.offcanvas-body -->
+          </div>
+          <!-- /.navbar-collapse -->
+          <div class="navbar-other w-full !flex !ml-auto">
+            <ul class="navbar-nav !flex-row !items-center !ml-auto">
+              <li class="nav-item">
+                <nav class="nav social social-muted justify-end text-right">
+                  <a class="m-[0_0_0_.7rem] text-[1rem] transition-all duration-[0.2s] ease-in-out translate-y-0 hover:translate-y-[-0.15rem]" href="#" aria-label="X">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#1da1f2"><path d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5549 21H20.7996L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z"/></svg>
+                  </a>
+                  <a class="m-[0_0_0_.7rem] text-[1rem] transition-all duration-[0.2s] ease-in-out translate-y-0 hover:translate-y-[-0.15rem]" href="#" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#0077b5"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg>
+                  </a>
+                  <a class="m-[0_0_0_.7rem] text-[1rem] transition-all duration-[0.2s] ease-in-out translate-y-0 hover:translate-y-[-0.15rem]" href="#" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#d53581"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"/></svg>
+                  </a>
+                </nav>
+                <!-- /.social -->
+              </li>
+              <li class="nav-item xl:hidden lg:hidden">
+                <button class="hamburger offcanvas-nav-btn text-[#343f52]"><span></span></button>
+              </li>
+            </ul>
+            <!-- /.navbar-nav -->
+          </div>
+          <!-- /.navbar-other -->
+        </div>
+        <!-- /.container -->
+      </nav>
+      <!-- /.navbar -->
+    </header>
+    <!-- /header -->
+    <section id="hero" class="wrapper image-wrapper bg-image bg-overlay text-white h-screen flex flex-col justify-center relative mt-16" data-image-src="./assets/img/photos/bg1.jpg">
+      <!-- Add starry background container inside hero section -->
+      <div id="canvas-container"></div>
+      <!-- Move strings container inside hero section -->
+      <div id="strings-canvas-container" class="absolute top-0 left-0 w-full h-full z-[1] pointer-events-none"></div>
+      <div class="container pt-36 xl:pt-[12.5rem] lg:pt-[12.5rem] md:pt-[12.5rem] pb-32 xl:pb-40 lg:pb-40 md:pb-40 !text-center relative z-10">
+        <div class="flex flex-wrap mx-[-15px]">
+          <div class="md:w-10/12 lg:w-8/12 xl:w-7/12 xxl:w-6/12 w-full flex-[0_0_auto] px-[15px] max-w-full !mx-auto">
+            <h1 class="text-[calc(1.365rem_+_1.38vw)] font-bold leading-[1.2] xl:text-[2.4rem] text-white !mb-3"><u>Detego</u><br>Unveiling Cultural Heritage</h1>
+            <p class="lead text-[1.05rem] leading-[1.6] font-medium md:!px-3 lg:!px-7 xl:!px-9 xxl:!px-10">We illuminate art, culture, and historical narratives through innovative digital experiences and AI-powered preservation solutions.</p>
+          </div>
+          <!-- /column -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container -->
+    </section>
+    <!-- /section -->
+    <section class="wrapper !bg-[#ffffff]">
+      <div class="container pt-[4.5rem] pb-14 xl:pt-24 lg:pt-24 md:pt-24 xl:pb-[4.5rem] lg:pb-[4.5rem] md:pb-[4.5rem]">
+        <div class="flex flex-wrap mx-[-15px] xl:mx-[-35px] lg:mx-[-20px] mt-[-50px] !mb-[2rem] xl:!mb-8 lg:!mb-8 md:!mb-8 items-center">
+          <div class="xl:w-7/12 lg:w-7/12 w-full flex-[0_0_auto] xl:px-[35px] lg:px-[20px] px-[15px] max-w-full xl:!order-2 lg:!order-2 mt-[50px]">
+            <div class="flex flex-wrap mx-[-15px] xl:mx-[-12.5px] lg:mx-[-12.5px] md:mx-[-12.5px] mt-[-25px]">
+              <div class="xl:w-5/12 lg:w-5/12 md:w-5/12 w-full flex-[0_0_auto] xl:px-[12.5px] lg:px-[12.5px] md:px-[12.5px] px-[15px] max-w-full xl:!ml-[8.33333333%] lg:!ml-[8.33333333%] md:!ml-[8.33333333%] !self-end mt-[25px]">
+                <div class="card !bg-[#fef3e4]">
+                  <div class="card-body p-[40px]">
+                    <i class="fas fa-images icon-svg icon-svg-md !w-[2.6rem] !h-[2.6rem] text-[#fab758] text-yellow !mb-3" aria-hidden="true"></i>
+                    <h4>Digital Art Galleries</h4>
+                    <p class="!mb-0">Transforming traditional exhibitions into immersive digital experiences that transcend physical limitations.</p>
+                  </div>
+                  <!--/.card-body -->
+                </div>
+                <!--/.card -->
+              </div>
+              <!--/column -->
+              <div class="xl:w-6/12 lg:w-6/12 md:w-6/12 w-full flex-[0_0_auto] xl:px-[12.5px] lg:px-[12.5px] md:px-[12.5px] px-[15px] max-w-full !self-end mt-[25px]">
+                <div class="card !bg-[#fae6e7]">
+                  <div class="card-body p-[40px]">
+                    <i class="fas fa-calendar-alt icon-svg icon-svg-md !w-[2.6rem] !h-[2.6rem] text-[#e2626b] text-red !mb-3" aria-hidden="true"></i>
+                    <h4>Cultural Events Planning</h4>
+                    <p class="!mb-0">Curating meaningful cultural experiences that blend physical and digital realms for global audiences.</p>
+                  </div>
+                  <!--/.card-body -->
+                </div>
+                <!--/.card -->
+              </div>
+              <!--/column -->
+              <div class="xl:w-5/12 lg:w-5/12 md:w-5/12 w-full flex-[0_0_auto] xl:px-[12.5px] lg:px-[12.5px] md:px-[12.5px] px-[15px] max-w-full mt-[25px]">
+                <div class="card !bg-[#eaf3ef]">
+                  <div class="card-body p-[40px]">
+                    <i class="fas fa-graduation-cap icon-svg icon-svg-md !w-[2.6rem] !h-[2.6rem] text-[#7cb798] text-leaf !mb-3" aria-hidden="true"></i>
+                    <h4>Online Education</h4>
+                    <p class="!mb-0">Interactive learning experiences that make cultural heritage accessible to curious minds of all ages.</p>
+                  </div>
+                  <!--/.card-body -->
+                </div>
+                <!--/.card -->
+              </div>
+              <!--/column -->
+              <div class="xl:w-6/12 lg:w-6/12 md:w-6/12 w-full flex-[0_0_auto] xl:px-[12.5px] lg:px-[12.5px] md:px-[12.5px] px-[15px] max-w-full !self-start mt-[25px]">
+                <div class="card !bg-[#e0e9fa]">
+                  <div class="card-body p-[40px]">
+                    <i class="fas fa-cloud icon-svg icon-svg-md text-[#3f78e0] text-primary !mb-3 !w-[2.6rem] !h-[2.6rem]" aria-hidden="true"></i>
+                    <h4>AI-Powered Preservation</h4>
+                    <p class="!mb-0">Leveraging artificial intelligence to document, restore, and preserve cultural artifacts for future generations.</p>
+                  </div>
+                  <!--/.card-body -->
+                </div>
+                <!--/.card -->
+              </div>
+              <!--/column -->
+            </div>
+            <!--/.row -->
+          </div>
+          <!--/column -->
+          <div class="xl:w-5/12 lg:w-5/12 w-full flex-[0_0_auto] xl:px-[35px] lg:px-[20px] px-[15px] mt-[50px] max-w-full">
+            <h2 class="!text-[.75rem] uppercase text-[#aab0bc] !mb-3 tracking-[0.02rem] leading-[1.35]">Illuminating Culture</h2>
+            <h3 class="text-[calc(1.305rem_+_0.66vw)] font-bold xl:text-[1.8rem] !leading-[1.3] mb-5">Bringing art, history, and cultural narratives to light through innovative digital solutions.</h3>
+            <p>At Detego—Latin for "to uncover" or "to reveal"—we bridge the gap between historical artifacts and modern audiences. Our AI-enhanced digital platforms preserve cultural heritage while making it accessible and engaging for everyone, from academic researchers to curious young minds.</p>
+          </div>
+          <!--/column -->
+        </div>
+        <!--/.row -->
+      </div>
+      <!-- /.container -->
+    </section>
+    <!-- /section -->
+    <section class="wrapper !bg-[#edf2fc]">
+      <div class="container py-[4.5rem] md:pt-24 lg:pt-0 xl:pt-0 xl:pb-24 lg:pb-24 md:pb-24">
+        <div class="flex flex-wrap mx-[-15px] !text-center">
+          <div class="xl:w-9/12 lg:w-9/12 w-full flex-[0_0_auto] px-[15px] max-w-full !mx-auto">
+            <h2 class="!text-[.75rem] uppercase text-[#aab0bc] mb-3 mt-[3.5rem] tracking-[0.02rem]">DETEGO PROCESS</h2>
+            <h3 class="text-[calc(1.305rem_+_0.66vw)] font-bold xl:text-[1.8rem] !leading-[1.3] !mb-6 !text-center xl:!px-10 xxl:!px-20">Our Cultural Heritage Preservation Workflow</h3>
+            <p class="mb-8 xl:!px-16 lg:!px-12">We follow a systematic approach to document, preserve, and share cultural artifacts with future generations, enhanced by cutting-edge AI technologies.</p>
+            <div class="flex flex-wrap mx-[-15px] xl:mx-[-35px] lg:mx-[-20px] process-wrapper !text-center mt-9">
+              <div class="xl:w-4/12 lg:w-4/12 md:w-4/12 w-full flex-[0_0_auto] xl:px-[35px] lg:px-[20px] px-[15px] max-w-full"> 
+                <i class="fas fa-search icon-svg text-[#3f78e0] mb-3 !w-[2.6rem] !h-[2.6rem] m-[0_auto]" aria-hidden="true"></i>
+                <h4 class="!mb-1">1. Cultural Curation</h4>
+                <p>We discover and illuminate cultural narratives through meticulous research, artist collaborations, and identification of meaningful stories that deserve to be shared with global audiences.</p>
+              </div>
+              <!--/column -->
+              <div class="xl:w-4/12 lg:w-4/12 md:w-4/12 w-full flex-[0_0_auto] xl:px-[35px] lg:px-[20px] px-[15px] max-w-full"> 
+                <i class="fas fa-paint-brush icon-svg icon-svg-md !w-[2.6rem] !h-[2.6rem] text-[#e2626b] text-red !mb-3 m-[0_auto]" aria-hidden="true"></i>
+                <h4 class="!mb-1">2. Artistic Digitalization</h4>
+                <p>Our experts transform physical artifacts and cultural expressions into digital formats, enriching them with historical context, cultural significance, and multilingual interpretations.</p>
+              </div>
+              <!--/column -->
+              <div class="xl:w-4/12 lg:w-4/12 md:w-4/12 w-full flex-[0_0_auto] xl:px-[35px] lg:px-[20px] px-[15px] max-w-full"> 
+                <i class="fas fa-users icon-svg icon-svg-md !w-[2.6rem] !h-[2.6rem] text-[#7cb798] text-leaf !mb-3 m-[0_auto]" aria-hidden="true"></i>
+                <h4 class="!mb-1">3. Cultural Connection</h4>
+                <p>We craft immersive events, publications, and educational experiences that bridge cultural divides, revealing the artistic mindset and connecting diverse communities to their shared heritage.</p>
+              </div>
+              <!--/column -->
+            </div>
+            <!--/.row -->
+         
+          </div>
+          <!-- /column -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container -->
+    </section>
+    <!-- /section -->
+    <section class="wrapper !bg-[#ffffff]">
+      <div class="container py-[4.5rem] xl:!py-24 lg:!py-24 md:!py-24">
+        <div class="flex flex-wrap mx-[-15px] xl:mx-[-35px] lg:mx-[-20px] mt-[-50px] !mb-[2rem] xl:!mb-0 lg:!mb-0 md:!mb-0 items-center">
+          <!-- First column -->
+          <div class="w-full md:w-6/12 lg:w-6/12 xl:w-6/12 flex-[0_0_auto] xl:px-[35px] lg:px-[20px] px-[15px] mt-[50px] max-w-full">
+            <h3 class="text-[calc(1.305rem_+_0.66vw)] font-bold xl:text-[1.8rem] !leading-[1.3] !mb-6 xxl:pr-6">Our cultural expertise spans across multiple disciplines to illuminate heritage.</h3>
+            <div class="art-expertise-wrapper mt-6">
+              <style>
+                .palette-container {
+                  position: relative;
+                  margin-bottom: 2rem;
+                  transition: all 0.3s ease;
+                }
+                .palette-container:hover {
+                  transform: scale(1.03);
+                }
+                .palette-icon {
+                  position: absolute;
+                  left: 0;
+                  top: 0;
+                  font-size: 2.5rem;
+                  color: #605dba;
+                }
+                .palette-content {
+                  padding-left: 4rem;
+                  padding-top: 0.5rem;
+                }
+                .palette-title {
+                  font-weight: 600;
+                  font-size: 1.1rem;
+                  margin-bottom: 0.5rem;
+                }
+                .palette-dots {
+                  display: flex;
+                  gap: 0.5rem;
+                }
+                .palette-dot {
+                  width: 1rem;
+                  height: 1rem;
+                  border-radius: 50%;
+                  display: inline-block;
+                  transition: all 0.3s ease;
+                }
+                .palette-dot.filled {
+                  opacity: 1;
+                }
+                .palette-dot.empty {
+                  opacity: 0.2;
+                }
+                .palette-container:hover .palette-dot.filled {
+                  transform: scale(1.2);
+                }
+                .palette-percentage {
+                  font-weight: 600;
+                  margin-left: 1rem;
+                }
+              </style>
+              
+              <!-- Digital Art Curation - Palette -->
+              <div class="palette-container">
+                <div class="palette-icon">
+                  <i class="fas fa-palette"></i>
+                </div>
+                <div class="palette-content">
+                  <div class="palette-title">Digital Art Curation</div>
+                  <div class="flex items-center">
+                    <div class="palette-dots">
+                      <span class="palette-dot filled" style="background-color: #3f78e0;"></span>
+                      <span class="palette-dot filled" style="background-color: #3f78e0;"></span>
+                      <span class="palette-dot filled" style="background-color: #3f78e0;"></span>
+                      <span class="palette-dot filled" style="background-color: #3f78e0;"></span>
+                      <span class="palette-dot filled" style="background-color: #3f78e0;"></span>
+                      <span class="palette-dot filled" style="background-color: #3f78e0;"></span>
+                      <span class="palette-dot filled" style="background-color: #3f78e0;"></span>
+                      <span class="palette-dot filled" style="background-color: #3f78e0;"></span>
+                      <span class="palette-dot filled" style="background-color: #3f78e0;"></span>
+                      <span class="palette-dot empty" style="background-color: #3f78e0;"></span>
+                    </div>
+                    <span class="palette-percentage">95%</span>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Interactive Exhibitions - Frame -->
+              <div class="palette-container">
+                <div class="palette-icon">
+                  <i class="fas fa-vr-cardboard"></i>
+                </div>
+                <div class="palette-content">
+                  <div class="palette-title">Interactive Exhibitions</div>
+                  <div class="flex items-center">
+                    <div class="palette-dots">
+                      <span class="palette-dot filled" style="background-color: #fab758;"></span>
+                      <span class="palette-dot filled" style="background-color: #fab758;"></span>
+                      <span class="palette-dot filled" style="background-color: #fab758;"></span>
+                      <span class="palette-dot filled" style="background-color: #fab758;"></span>
+                      <span class="palette-dot filled" style="background-color: #fab758;"></span>
+                      <span class="palette-dot filled" style="background-color: #fab758;"></span>
+                      <span class="palette-dot filled" style="background-color: #fab758;"></span>
+                      <span class="palette-dot filled" style="background-color: #fab758;"></span>
+                      <span class="palette-dot filled" style="background-color: #fab758;"></span>
+                      <span class="palette-dot empty" style="background-color: #fab758;"></span>
+                    </div>
+                    <span class="palette-percentage">90%</span>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Cultural Education - Book -->
+              <div class="palette-container">
+                <div class="palette-icon">
+                  <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="palette-content">
+                  <div class="palette-title">Cultural Education</div>
+                  <div class="flex items-center">
+                    <div class="palette-dots">
+                      <span class="palette-dot filled" style="background-color: #e2626b;"></span>
+                      <span class="palette-dot filled" style="background-color: #e2626b;"></span>
+                      <span class="palette-dot filled" style="background-color: #e2626b;"></span>
+                      <span class="palette-dot filled" style="background-color: #e2626b;"></span>
+                      <span class="palette-dot filled" style="background-color: #e2626b;"></span>
+                      <span class="palette-dot filled" style="background-color: #e2626b;"></span>
+                      <span class="palette-dot filled" style="background-color: #e2626b;"></span>
+                      <span class="palette-dot filled" style="background-color: #e2626b;"></span>
+                      <span class="palette-dot empty" style="background-color: #e2626b;"></span>
+                      <span class="palette-dot empty" style="background-color: #e2626b;"></span>
+                    </div>
+                    <span class="palette-percentage">85%</span>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Heritage Preservation - Landmark -->
+              <div class="palette-container">
+                <div class="palette-icon">
+                  <i class="fas fa-landmark"></i>
+                </div>
+                <div class="palette-content">
+                  <div class="palette-title">Heritage Preservation</div>
+                  <div class="flex items-center">
+                    <div class="palette-dots">
+                      <span class="palette-dot filled" style="background-color: #7cb798;"></span>
+                      <span class="palette-dot filled" style="background-color: #7cb798;"></span>
+                      <span class="palette-dot filled" style="background-color: #7cb798;"></span>
+                      <span class="palette-dot filled" style="background-color: #7cb798;"></span>
+                      <span class="palette-dot filled" style="background-color: #7cb798;"></span>
+                      <span class="palette-dot filled" style="background-color: #7cb798;"></span>
+                      <span class="palette-dot filled" style="background-color: #7cb798;"></span>
+                      <span class="palette-dot filled" style="background-color: #7cb798;"></span>
+                      <span class="palette-dot filled" style="background-color: #7cb798;"></span>
+                      <span class="palette-dot empty" style="background-color: #7cb798;"></span>
+                    </div>
+                    <span class="palette-percentage">90%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--/column -->
+          
+          <!-- Second column -->
+          <div class="w-full md:w-6/12 lg:w-6/12 xl:w-6/12 flex-[0_0_auto] xl:px-[35px] lg:px-[20px] px-[15px] mt-[50px] max-w-full">
+            <h3 class="text-[calc(1.305rem_+_0.66vw)] font-bold xl:text-[1.8rem] !leading-[1.3] mb-5">Empowering cultural experiences with AI-driven solutions that transcend boundaries.</h3>
+            <p class="!mb-6">Our AI-enhanced technologies bring art and cultural heritage to life in ways never before possible. From ancient artifacts to contemporary masterpieces, we create immersive digital experiences that educate, inspire, and preserve cultural legacies.</p>
+            <div class="flex flex-wrap mx-[-15px] mt-[-15px]">
+              <div class="xl:w-6/12 w-full flex-[0_0_auto] px-[15px] mt-[15px] max-w-full">
+                <ul class="pl-0 list-none !mb-0">
+                  <li class="flex items-center mb-3">
+                    <i class="fas fa-landmark text-[#3f78e0] mr-4 text-xl"></i>
+                    <span>Virtual museum exhibits and galleries</span>
+                  </li>
+                  <li class="flex items-center">
+                    <i class="fas fa-calendar-alt text-[#fab758] mr-4 text-xl"></i>
+                    <span>Cultural event planning and execution</span>
+                  </li>
+                </ul>
+              </div>
+              <!--/column -->
+              <div class="xl:w-6/12 w-full flex-[0_0_auto] px-[15px] mt-[15px] max-w-full">
+                <ul class="pl-0 list-none !mb-0">
+                  <li class="flex items-center mb-3">
+                    <i class="fas fa-book-open text-[#e2626b] mr-4 text-xl"></i>
+                    <span>Interactive educational resources</span>
+                  </li>
+                  <li class="flex items-center">
+                    <i class="fas fa-paint-brush text-[#7cb798] mr-4 text-xl"></i>
+                    <span>AI-powered artifact authentication</span>
+                  </li>
+                </ul>
+              </div>
+              <!--/column -->
+            </div>
+            <!--/.row -->
+          </div>
+          <!--/column -->
+        </div>
+        <!--/.row -->
+      </div>
+      <!-- /.container -->
+    </section>
+    <!-- /section -->
+    <section class="wrapper image-wrapper bg-auto no-overlay bg-image !text-center bg-map bg-[center_center] bg-no-repeat !bg-scroll relative z-[0]" data-image-src="./assets/img/map.png">
+      <div class="container pt-0 pb-[4.5rem] xl:pt-8 lg:pt-8 md:pt-8 xl:pb-32 lg:pb-32 md:pb-32">
+        <div class="flex flex-wrap mx-[-15px]">
+          <div class="lg:w-10/12 xl:w-9/12 xxl:w-8/12 w-full flex-[0_0_auto] px-[15px] max-w-full !mx-auto">
+            <h2 class="!text-[.75rem] uppercase text-[#aab0bc] !mb-3 tracking-[0.02rem] leading-[1.35]">Global Cultural Impact</h2>
+            <h3 class="text-[calc(1.305rem_+_0.66vw)] font-bold xl:text-[1.8rem] !leading-[1.3] !mb-8 lg:!px-14 xl:!px-14">Join our mission to preserve cultural heritage and make it accessible worldwide.</h3>
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /column -->
+       
+        <!-- /.row -->
+      </div>
+      <!-- /.container -->
+    </section>
+    <!-- /section -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="wrapper bg-repeat bg-fixed bg-image section-frame xl:mx-6 xl:rounded-[1rem] lg:mx-6 lg:rounded-[1rem] md:mx-6 md:rounded-[1rem]" data-image-src="./assets/img/pattern.png">
+    <div class="container pb-16 xl:pb-20 lg:pb-20 md:pb-20">
+      <div class="card image-wrapper bg-full bg-image bg-overlay xl:mx-5 lg:mx-5 md:mx-5 !rounded-[0.8rem] overflow-hidden [background-size:100%] bg-[center_center] bg-no-repeat bg-scroll relative z-0 before:content-[''] before:block before:absolute before:z-[1] before:w-full before:h-full before:rounded-[0.4rem] before:left-0 before:top-0 before:bg-[rgba(30,34,40,.5)] -translate-y-2/4" data-image-src="./assets/img/photos/bg27.jpg">
+        <div class="card-body p-6 flex-row text-center xl:!justify-between lg:!justify-between md:!justify-between xl:flex xl:!items-center lg:flex lg:!items-center xl:!p-12 lg:!p-12 md:!p-12 xl:!text-left lg:!text-left">
+          <h3 class="text-[calc(1.345rem_+_1.14vw)] !font-semibold !leading-[1.2] xl:text-[2.2rem] !mb-6 xl:!mb-0 lg:!mb-0 lg:pr-[2.5rem] xl:pr-[1.25rem] xxl:pr-[8rem] text-white">Join the <span class="text-[#e668b3]">Re</span><span class="text-[#605dba]">De</span><span class="text-[#45c4a0]">S</span> network where tradition meets innovation across cultures.</h3>          
+          <a href="#" class="btn btn-lg btn-white !rounded-[0.8rem] !mb-0 whitespace-nowrap">Partner With Detego</a>
+        </div>
+        <!--/.card-body -->
+      </div>
+      <!--/.card -->
+      <div class="text-[#cacaca] xl:mx-5 lg:mx-5 md:mx-5 mt-[-5rem] xl:!mt-0 lg:!mt-0">
+        <div class="flex flex-wrap mx-[-15px] mt-[-30px] xl:mt-0 lg:mt-0">
+          <div class="xl:w-4/12 lg:w-4/12 w-full flex-[0_0_auto] px-[15px] max-w-full">
+            <div class="widget">
+              <h3 class="h2 !mb-3 !text-white !leading-[1.35]">Bridging worlds, connecting futures.</h3>
+              <p class="!mb-2 italic"><span style="color: #e668b3;">Connecting worlds</span> · <span style="color: #605dba;">Conectando mundos</span> · <span style="color: #45c4a0;">Συνδέοντας Κόσμους</span></p>
+              <p class="!mb-5">REDES is where cultures connect. Our name reflects our mission: <span class="text-[#e668b3]">Re</span>think transforms business with AI, <span class="text-[#605dba]">De</span>tego reveals cultural heritage, and <span class="text-[#45c4a0]">S</span>ophia delivers accessible healthcare. We bridge traditions and innovation across languages to build an inclusive future.</p>              
+              <p class="!mb-1">© 2025 REDES<br><span class="text-[#605dba]/80 text-xs">Connecting worlds across languages and cultures</span></p>
+              <nav class="nav social social-white">
+                <a class="m-[0_.7rem_0_0] text-[1rem] transition-all duration-[0.2s] ease-in-out translate-y-0 hover:translate-y-[-0.15rem]" href="#" aria-label="X">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5549 21H20.7996L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z"/></svg>
+                </a>
+                <a class="m-[0_.7rem_0_0] text-[1rem] transition-all duration-[0.2s] ease-in-out translate-y-0 hover:translate-y-[-0.15rem]" href="#" aria-label="LinkedIn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg>
+                </a>
+                <a class="m-[0_.7rem_0_0] text-[1rem] transition-all duration-[0.2s] ease-in-out translate-y-0 hover:translate-y-[-0.15rem]" href="#" aria-label="Instagram">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"/></svg>
+                </a>
+              </nav>
+              <!-- /.social -->
+            </div>
+            <!-- /.widget -->
+          </div>
+          <!-- /column -->
+          <div class="md:w-4/12 lg:w-2/12 xl:w-2/12 w-full flex-[0_0_auto] px-[15px] max-w-full lg:!ml-[16.66666667%] xl:!ml-[16.66666667%] mt-[30px] xl:mt-0 lg:mt-0">
+            
+            <!-- /.widget -->
+          </div>
+          <!-- /column -->
+          <div class="md:w-4/12 lg:w-2/12 xl:w-2/12 w-full flex-[0_0_auto] px-[15px] max-w-full mt-[30px] xl:mt-0 lg:mt-0">
+            <div class="widget">
+              <h4 class="widget-title text-white !mb-3">Explore</h4>
+              <ul class="pl-0 list-none text-inherit !mb-0">
+                <li><a class="text-white hover:text-[#605dba]" href="about.html">About Us</a></li>
+                <li class="mt-[0.35rem]"><a class="text-white hover:text-[#605dba]" href="rethink.html">Rethink</a></li>
+                <li class="mt-[0.35rem]"><a class="text-white hover:text-[#605dba]" href="detego.html">Detego</a></li>
+                <li class="mt-[0.35rem]"><a class="text-white hover:text-[#605dba]" href="sophia.html">Sophia</a></li>
+              </ul>
+            </div>
+            <!-- /.widget -->
+          </div>
+          <!-- /column -->
+          <div class="md:w-4/12 lg:w-2/12 xl:w-2/12 w-full flex-[0_0_auto] px-[15px] max-w-full mt-[30px] xl:mt-0 lg:mt-0">
+            <div class="widget">
+              <h4 class="widget-title !mb-[.75rem] !text-[.95rem] !leading-[1.45] !text-white">Get in Touch</h4>
+              <address class="not-italic leading-[inherit] mb-4">Email us with your innovative ideas, partnership opportunities, or questions. We're excited to collaborate!</address>
+              <a href="mailto:hello@redeslabs.com" class="text-white hover:text-[#605dba]">hello@redeslabs.com</a>
+            </div>
+            <!-- /.widget -->
+          </div>
+          <!-- /column -->
+        </div>
+        <!--/.row -->
+      </div>
+    </div>
+    <!-- /.container -->
+  </footer>
+  <div class="xl:pb-6 lg:pb-6 md:pb-6"></div>
+  <script src="./assets/js/plugins.js"></script>
+  <script src="./assets/js/theme.js"></script>
+  <!-- Load the strings effect script -->
+  <script src="./assets/js/strings.js"></script>
+  <!-- Load the starry night effect script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Apply styling to Font Awesome icons
+      const icons = document.querySelectorAll('.fas');
+      icons.forEach(icon => {
+        icon.style.fontSize = '2.6rem';
+        icon.style.display = 'inline-block';
+      });
+    });
+  </script>
+</body>
+
+</html>

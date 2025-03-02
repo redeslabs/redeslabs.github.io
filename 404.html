@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Lost in Space</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #000;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+    #canvas-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+    }
+    .ui-panel {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      z-index: 100;
+    }
+    .game-stats {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+    .stat {
+      margin-right: 15px;
+    }
+    button, .back-button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      margin: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    button:hover, .back-button:hover {
+      background-color: #2980b9;
+    }
+    .instructions {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 14px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    .game-over {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px 30px;
+      border-radius: 10px;
+      text-align: center;
+      border: 2px solid rgba(255, 0, 0, 0.6);
+      z-index: 200;
+      display: none;
+    }
+    .game-over h2 {
+      color: #ff3333;
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="canvas-container">
+    <div class="ui-panel">
+      <h3>404 - Page Not Found</h3>
+      <p>Oops! The page you're looking for doesn't exist. Enjoy exploring space while you're here!</p>
+      <div class="game-stats">
+        <div class="stat">Score: <span id="score">0</span></div>
+        <div class="stat">Lives: <span id="lives">3</span></div>
+        <div class="stat">Fuel: <span id="fuel">100</span>%</div>
+      </div>
+      <button id="btn-restart">Restart Game</button>
+      <a href="home.html" class="back-button">Back to Main Page</a>
+    </div>
+    <div class="instructions">
+      <p>WASD or Arrow Keys to navigate • Space to shoot • Avoid asteroids and planets • Collect fuel cells</p>
+    </div>
+    <div class="game-over" id="game-over-panel">
+      <h2>Game Over</h2>
+      <p id="game-over-message">Your spacecraft was destroyed! The page you're seeking is still out there.</p>
+      <p>Final Score: <span id="final-score">0</span></p>
+      <button id="btn-try-again">Try Again</button>
+      <a href="home.html" class="back-button">Back to Main Page</a>
+    </div>
+  </div>
+
+  <script>
+    // Game variables
+    let stars = [];
+    let planets = [];
+    let asteroids = [];
+    let lasers = [];
+    let fuelCells = [];
+    let explosions = [];
+    let gameOver = false;
+    let score = 0;
+    let lives = 3;
+    let fuel = 100;
+    let spaceWidth = 10000;
+    let spaceHeight = 6000;
+    let starColors = ['#FFFFFF', '#FFFCDD', '#FFF4BB', '#FFE4A8', '#FF9D5C', '#FF6E50', '#FF5E62', '#AAAAFF', '#9CECFB'];
+    
+    // Player spaceship
+    let ship = {
+      x: 0,
+      y: 0,
+      rotation: 0,
+      size: 30,
+      speed: 0,
+      maxSpeed: 5,
+      acceleration: 0.1,
+      rotationSpeed: 0.08,
+      thrusting: false,
+      shootCooldown: 0,
+      invulnerable: 0,
+      // Hitbox is slightly smaller than visual size
+      getHitbox: function() {
+        return this.size * 0.7;
+      }
+    };
+    
+    // Planet types with their properties
+    const planetTypes = [
+      { name: "Rocky Planet", color: "#A77B5C", atmosphere: "#FF634740", rings: false },
+      { name: "Gas Giant", color: "#DDA52C", atmosphere: "#FFAA2240", rings: true },
+      { name: "Ice Planet", color: "#A5D6D9", atmosphere: "#FFFFFF30", rings: false },
+      { name: "Lava Planet", color: "#D13B27", atmosphere: "#FF450030", rings: false },
+      { name: "Earth-like", color: "#4281A4", atmosphere: "#FFFFFF40", rings: false },
+      { name: "Ringed Planet", color: "#D9A679", atmosphere: "#FFC98440", rings: true }
+    ];
+    
+    // Asteroid properties
+    const asteroidColors = ['#8B8B8B', '#A59E8C', '#7D7463', '#5C5C5C', '#4A4A4A'];
+    
+    // Star class
+    class Star {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.size = random(1, 3.5);
+        this.color = random(starColors);
+        this.twinkleSpeed = random(0.01, 0.05);
+        this.twinkleAmount = random(0.5, 1);
+        this.twinkleOffset = random(0, TWO_PI);
+        this.parallaxFactor = map(this.size, 1, 3.5, 0.3, 0.8);
+      }
+      
+      display() {
+        let twinkle = 1 + sin(frameCount * this.twinkleSpeed + this.twinkleOffset) * this.twinkleAmount;
+        let screenX = this.x - ship.x * this.parallaxFactor;
+        let screenY = this.y - ship.y * this.parallaxFactor;
+        
+        // Only draw stars that are in view
+        if (isInView(screenX, screenY, this.size)) {
+          push();
+          fill(this.color);
+          noStroke();
+          ellipse(screenX, screenY, this.size * twinkle);
+          
+          // Add slight glow to larger stars
+          if (this.size > 2) {
+            let glowColor = color(this.color);
+            glowColor.setAlpha(30);
+            fill(glowColor);
+            ellipse(screenX, screenY, this.size * 2.5);
+          }
+          pop();
+        }
+      }
+    }
+    
+    // Planet class
+    class Planet {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.type = random(planetTypes);
+        this.size = random(100, 200);
+        this.rotationSpeed = random(0.001, 0.005);
+        this.rotation = random(TWO_PI);
+        this.hasRings = this.type.rings;
+        this.ringSize = random(1.5, 2.2);
+        this.ringColor = color(random(200, 255), random(200, 255), random(200, 255), 150);
+        this.ringRotation = random(TWO_PI);
+        
+        // For surface details
+        this.surfaceDetail = [];
+        let numDetails = floor(random(3, 8));
+        for (let i = 0; i < numDetails; i++) {
+          this.surfaceDetail.push({
+            angle: random(TWO_PI),
+            width: random(PI/8, PI/3),
+            distance: random(0.5, 0.9),
+            color: color(
+              red(color(this.type.color)) * random(0.7, 1.1),
+              green(color(this.type.color)) * random(0.7, 1.1),
+              blue(color(this.type.color)) * random(0.7, 1.1)
+            )
+          });
+        }
+      }
+      
+      display() {
+        let screenX = this.x - ship.x + width/2;
+        let screenY = this.y - ship.y + height/2;
+        
+        // Only draw planets that are in view
+        if (isInView(screenX, screenY, this.size * (this.hasRings ? this.ringSize : 1))) {
+          push();
+          translate(screenX, screenY);
+          
+          // Draw rings if the planet has them
+          if (this.hasRings) {
+            push();
+            rotate(this.ringRotation);
+            noFill();
+            stroke(this.ringColor);
+            strokeWeight(this.size * 0.2);
+            ellipse(0, 0, this.size * this.ringSize, this.size * this.ringSize * 0.3);
+            pop();
+          }
+          
+          // Draw planet
+          fill(this.type.color);
+          noStroke();
+          ellipse(0, 0, this.size);
+          
+          // Draw surface details
+          rotate(this.rotation);
+          for (let detail of this.surfaceDetail) {
+            push();
+            rotate(detail.angle);
+            fill(detail.color);
+            arc(0, 0, this.size * detail.distance, this.size * detail.distance, -detail.width/2, detail.width/2);
+            pop();
+          }
+          
+          // Draw atmosphere
+          fill(this.type.atmosphere);
+          ellipse(0, 0, this.size * 1.1);
+          
+          pop();
+          
+          // Update rotation
+          this.rotation += this.rotationSpeed;
+        }
+      }
+      
+      getCollisionRadius() {
+        return this.size / 2 * (this.hasRings ? this.ringSize : 1);
+      }
+      
+      checkCollision(x, y, radius) {
+        let distance = dist(this.x, this.y, x, y);
+        return distance < this.getCollisionRadius() + radius;
+      }
+    }
+    
+    // Asteroid class
+    class Asteroid {
+      constructor(x, y, size = null) {
+        this.x = x;
+        this.y = y;
+        this.size = size || random(15, 40);
+        this.color = random(asteroidColors);
+        this.rotation = random(TWO_PI);
+        this.rotationSpeed = random(0.01, 0.05);
+        this.velocityX = random(-1, 1);
+        this.velocityY = random(-1, 1);
+        this.health = floor(this.size / 10);
+        
+        // Create jagged shape
+        this.vertices = [];
+        let numVertices = floor(random(5, 10));
+        for (let i = 0; i < numVertices; i++) {
+          let angle = map(i, 0, numVertices, 0, TWO_PI);
+          let r = this.size * random(0.7, 1.3);
+          this.vertices.push({
+            x: cos(angle) * r,
+            y: sin(angle) * r
+          });
+        }
+      }
+      
+      display() {
+        let screenX = this.x - ship.x + width/2;
+        let screenY = this.y - ship.y + height/2;
+        
+        if (isInView(screenX, screenY, this.size * 2)) {
+          push();
+          translate(screenX, screenY);
+          rotate(this.rotation);
+          
+          fill(this.color);
+          stroke(30);
+          strokeWeight(1);
+          
+          beginShape();
+          for (let v of this.vertices) {
+            vertex(v.x, v.y);
+          }
+          endShape(CLOSE);
+          
+          pop();
+          
+          // Update rotation
+          this.rotation += this.rotationSpeed;
+        }
+      }
+      
+      update() {
+        this.x += this.velocityX;
+        this.y += this.velocityY;
+        
+        // Wrap around the gameplay area
+        const boundsX = spaceWidth / 4;
+        const boundsY = spaceHeight / 4;
+        
+        if (this.x < ship.x - boundsX) this.x = ship.x + boundsX;
+        if (this.x > ship.x + boundsX) this.x = ship.x - boundsX;
+        if (this.y < ship.y - boundsY) this.y = ship.y + boundsY;
+        if (this.y > ship.y + boundsY) this.y = ship.y - boundsY;
+      }
+      
+      getCollisionRadius() {
+        return this.size * 0.8;  // Slightly smaller than visual size
+      }
+      
+      checkCollision(x, y, radius) {
+        let distance = dist(this.x, this.y, x, y);
+        return distance < this.getCollisionRadius() + radius;
+      }
+      
+      damage() {
+        this.health--;
+        if (this.health <= 0) {
+          // Create explosion
+          explosions.push(new Explosion(this.x, this.y, this.size));
+          
+          // Add score
+          score += floor(this.size);
+          updateScoreDisplay();
+          
+          // If the asteroid is large enough, split it
+          if (this.size > 25) {
+            for (let i = 0; i < 2; i++) {
+              let newSize = this.size * random(0.4, 0.6);
+              let angle = random(TWO_PI);
+              let distance = this.size * 0.5;
+              let newX = this.x + cos(angle) * distance;
+              let newY = this.y + sin(angle) * distance;
+              
+              let newAsteroid = new Asteroid(newX, newY, newSize);
+              newAsteroid.velocityX = this.velocityX + random(-0.5, 0.5);
+              newAsteroid.velocityY = this.velocityY + random(-0.5, 0.5);
+              asteroids.push(newAsteroid);
+            }
+          }
+          
+          // Chance to spawn a fuel cell
+          if (random() < 0.2) {
+            fuelCells.push(new FuelCell(this.x, this.y));
+          }
+          
+          return true; // Asteroid destroyed
+        }
+        return false; // Asteroid still alive
+      }
+    }
+    
+    // Laser class
+    class Laser {
+      constructor(x, y, angle) {
+        this.x = x;
+        this.y = y;
+        this.angle = angle;
+        this.speed = 10;
+        this.size = 5;
+        this.lifespan = 60; // Frames the laser will exist
+        this.color = color(255, 0, 0);
+      }
+      
+      update() {
+        this.x += cos(this.angle) * this.speed;
+        this.y += sin(this.angle) * this.speed;
+        this.lifespan--;
+      }
+      
+      display() {
+        let screenX = this.x - ship.x + width/2;
+        let screenY = this.y - ship.y + height/2;
+        
+        if (isInView(screenX, screenY, this.size * 2)) {
+          push();
+          translate(screenX, screenY);
+          rotate(this.angle);
+          
+          // Draw laser beam
+          stroke(this.color);
+          strokeWeight(2);
+          line(0, 0, -this.size * 3, 0);
+          
+          // Draw laser tip
+          fill(this.color);
+          noStroke();
+          ellipse(0, 0, this.size);
+          
+          pop();
+        }
+      }
+      
+      isDead() {
+        return this.lifespan <= 0;
+      }
+      
+      checkCollisions() {
+        // Check collisions with asteroids
+        for (let i = asteroids.length - 1; i >= 0; i--) {
+          if (asteroids[i].checkCollision(this.x, this.y, this.size)) {
+            if (asteroids[i].damage()) {
+              asteroids.splice(i, 1);
+            }
+            return true; // Laser hit something
+          }
+        }
+        return false; // No collision
+      }
+    }
+    
+    // Fuel Cell class
+    class FuelCell {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.size = 15;
+        this.rotation = random(TWO_PI);
+        this.rotationSpeed = 0.02;
+        this.pulseAmount = 0;
+        this.pulseSpeed = 0.05;
+        this.fuelAmount = random(10, 30);
+      }
+      
+      update() {
+        this.rotation += this.rotationSpeed;
+        this.pulseAmount = (sin(frameCount * this.pulseSpeed) + 1) * 0.5;
+      }
+      
+      display() {
+        let screenX = this.x - ship.x + width/2;
+        let screenY = this.y - ship.y + height/2;
+        
+        if (isInView(screenX, screenY, this.size * 2)) {
+          push();
+          translate(screenX, screenY);
+          rotate(this.rotation);
+          
+          // Draw fuel cell
+          fill(0, 150, 255, 150 + this.pulseAmount * 100);
+          stroke(0, 200, 255);
+          strokeWeight(2);
+          
+          // Cell body
+          rect(-this.size/2, -this.size/2, this.size, this.size, 3);
+          
+          // Energy inside
+          fill(100, 200, 255, 150 + this.pulseAmount * 100);
+          rect(-this.size/3, -this.size/3, this.size * 2/3, this.size * 2/3, 2);
+          
+          // Glow effect
+          noStroke();
+          fill(0, 150, 255, 30 + this.pulseAmount * 30);
+          ellipse(0, 0, this.size * 2.5);
+          
+          pop();
+        }
+      }
+      
+      checkCollision() {
+        let distance = dist(this.x, this.y, ship.x, ship.y);
+        return distance < this.size + ship.getHitbox();
+      }
+    }
+    
+    // Explosion class
+    class Explosion {
+      constructor(x, y, size) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.particles = [];
+        this.lifespan = 30;
+        
+        // Create explosion particles
+        let numParticles = floor(size * 0.5);
+        for (let i = 0; i < numParticles; i++) {
+          this.particles.push({
+            x: 0,
+            y: 0,
+            vx: random(-3, 3),
+            vy: random(-3, 3),
+            size: random(2, 6),
+            color: color(
+              random(200, 255),
+              random(100, 200),
+              random(0, 50),
+              255
+            ),
+            decay: random(5, 10)
+          });
+        }
+      }
+      
+      update() {
+        this.lifespan--;
+        
+        for (let p of this.particles) {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.color.setAlpha(p.color.levels[3] - p.decay);
+        }
+      }
+      
+      display() {
+        let screenX = this.x - ship.x + width/2;
+        let screenY = this.y - ship.y + height/2;
+        
+        if (isInView(screenX, screenY, this.size * 3)) {
+          push();
+          translate(screenX, screenY);
+          
+          // Draw explosion particles
+          noStroke();
+          for (let p of this.particles) {
+            fill(p.color);
+            ellipse(p.x, p.y, p.size);
+          }
+          
+          pop();
+        }
+      }
+      
+      isDead() {
+        return this.lifespan <= 0;
+      }
+    }
+    
+    // Function to check if object is in the current view
+    function isInView(x, y, size) {
+      return (
+        x + size > 0 &&
+        x - size < width &&
+        y + size > 0 &&
+        y - size < height
+      );
+    }
+    
+    // Generate stars in gameplay area
+    function generateStars(density = 500) {
+      stars = [];
+      for (let i = 0; i < density; i++) {
+        let x = random(-spaceWidth/2, spaceWidth/2);
+        let y = random(-spaceHeight/2, spaceHeight/2);
+        stars.push(new Star(x, y));
+      }
+    }
+    
+    // Generate planets for the game level
+    function generatePlanets(count = 8) {
+      planets = [];
+      const minDistance = 700; // Minimum distance between planets
+      
+      for (let i = 0; i < count; i++) {
+        let validPosition = false;
+        let newX, newY;
+        
+        // Try to find a position that's not too close to other planets
+        let attempts = 0;
+        while (!validPosition && attempts < 20) {
+          newX = random(-spaceWidth/2, spaceWidth/2);
+          newY = random(-spaceHeight/2, spaceHeight/2);
+          
+          // Check distance to other planets
+          validPosition = true;
+          for (let planet of planets) {
+            if (dist(newX, newY, planet.x, planet.y) < minDistance) {
+              validPosition = false;
+              break;
+            }
+          }
+          
+          // Don't place planets too close to starting position
+          if (dist(newX, newY, 0, 0) < 500) {
+            validPosition = false;
+          }
+          
+          attempts++;
+        }
+        
+        if (validPosition) {
+          planets.push(new Planet(newX, newY));
+        }
+      }
+    }
+    
+    // Generate asteroids for the game
+    function generateAsteroids(count = 20) {
+      asteroids = [];
+      for (let i = 0; i < count; i++) {
+        // Place asteroids away from the starting position
+        let angle = random(TWO_PI);
+        let distance = random(400, 1200);
+        let x = cos(angle) * distance;
+        let y = sin(angle) * distance;
+        
+        asteroids.push(new Asteroid(x, y));
+      }
+    }
+    
+    // Draw the player's spaceship
+    function drawShip() {
+      push();
+      translate(width/2, height/2);
+      rotate(ship.rotation);
+      
+      // Draw thrust if the ship is accelerating
+      if (ship.thrusting && !gameOver) {
+        push();
+        translate(-ship.size * 0.5, 0);
+        fill(255, 100, 0, random(150, 255));
+        noStroke();
+        
+        // Animated flame
+        beginShape();
+        vertex(-ship.size * 0.5, 0);
+        vertex(-ship.size * (0.8 + random(0.4)), ship.size * (0.3 + random(0.2)));
+        vertex(-ship.size * (1.2 + random(0.6)), 0);
+        vertex(-ship.size * (0.8 + random(0.4)), ship.size * (-0.3 - random(0.2)));
+        endShape(CLOSE);
+        
+        // Inner flame
+        fill(255, 200, 0, random(150, 255));
+        beginShape();
+        vertex(-ship.size * 0.3, 0);
+        vertex(-ship.size * (0.6 + random(0.3)), ship.size * (0.2 + random(0.1)));
+        vertex(-ship.size * (0.8 + random(0.4)), 0);
+        vertex(-ship.size * (0.6 + random(0.3)), ship.size * (-0.2 - random(0.1)));
+        endShape(CLOSE);
+        pop();
+      }
+      
+      // Ship body
+      if (ship.invulnerable > 0 && frameCount % 6 < 3) {
+        // Flashing effect when invulnerable
+        fill(200, 200, 255, 150);
+        stroke(0, 150, 255);
+      } else {
+        fill(220, 220, 255);
+        stroke(50, 50, 100);
+      }
+      
+      strokeWeight(2);
+      beginShape();
+      vertex(ship.size * 0.5, 0);
+      vertex(-ship.size * 0.5, ship.size * 0.4);
+      vertex(-ship.size * 0.3, 0);
+      vertex(-ship.size * 0.5, -ship.size * 0.4);
+      endShape(CLOSE);
+      
+      // Cockpit
+      fill(100, 200, 255, 200);
+      noStroke();
+      ellipse(ship.size * 0.15, 0, ship.size * 0.3);
+      
+      // Wing details
+      stroke(50, 50, 100);
+      line(-ship.size * 0.2, ship.size * 0.2, -ship.size * 0.4, ship.size * 0.4);
+      line(-ship.size * 0.2, -ship.size * 0.2, -ship.size * 0.4, -ship.size * 0.4);
+      
+      pop();
+    }
+    
+    // Update the player's ship position and state
+    function updateShip() {
+      if (gameOver) return;
+      
+      // Apply rotation
+      if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) { // Left arrow or A
+        ship.rotation -= ship.rotationSpeed;
+      }
+      if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) { // Right arrow or D
+        ship.rotation += ship.rotationSpeed;
+      }
+      
+      // Apply thrust
+      ship.thrusting = false;
+      if ((keyIsDown(UP_ARROW) || keyIsDown(87)) && fuel > 0) { // Up arrow or W
+        ship.thrusting = true;
+        ship.speed += ship.acceleration;
+        fuel -= 0.2;
+        updateFuelDisplay();
+      }
+      
+      // Apply brake/reverse
+      if ((keyIsDown(DOWN_ARROW) || keyIsDown(83)) && fuel > 0) { // Down arrow or S
+        ship.speed -= ship.acceleration * 0.5;
+        fuel -= 0.1;
+        updateFuelDisplay();
+      }
+      
+      // Clamp speed
+      ship.speed = constrain(ship.speed, -ship.maxSpeed * 0.5, ship.maxSpeed);
+      
+      // Apply friction
+      ship.speed *= 0.98;
+      
+      // Update position
+      ship.x += cos(ship.rotation) * ship.speed;
+      ship.y += sin(ship.rotation) * ship.speed;
+      
+      // Update shoot cooldown
+      if (ship.shootCooldown > 0) {
+        ship.shootCooldown--;
+      }
+      
+      // Update invulnerability
+      if (ship.invulnerable > 0) {
+        ship.invulnerable--;
+      }
+      
+      // Shooting
+      if ((keyIsDown(32) || keyIsDown(69)) && ship.shootCooldown === 0 && !gameOver) { // Space or E
+        let laserX = ship.x + cos(ship.rotation) * ship.size * 0.6;
+        let laserY = ship.y + sin(ship.rotation) * ship.size * 0.6;
+        lasers.push(new Laser(laserX, laserY, ship.rotation));
+        ship.shootCooldown = 10; // Cooldown time between shots
+      }
+      
+      // Check for collisions
+      checkShipCollisions();
+    }
+    
+    // Check if the ship collides with any objects
+    function checkShipCollisions() {
+      if (ship.invulnerable > 0 || gameOver) return;
+      
+      // Check collisions with planets
+      for (let planet of planets) {
+        if (planet.checkCollision(ship.x, ship.y, ship.getHitbox())) {
+          // Game over if you hit a planet
+          triggerGameOver("Your ship crashed into a planet!");
+          return;
+        }
+      }
+      
+      // Check collisions with asteroids
+      for (let i = asteroids.length - 1; i >= 0; i--) {
+        if (asteroids[i].checkCollision(ship.x, ship.y, ship.getHitbox())) {
+          // Lose a life and destroy the asteroid
+          lives--;
+          updateLivesDisplay();
+          
+          // Create explosion
+          explosions.push(new Explosion(asteroids[i].x, asteroids[i].y, asteroids[i].size));
+          asteroids.splice(i, 1);
+          
+          if (lives <= 0) {
+            triggerGameOver("Your ship was destroyed by asteroids!");
+          } else {
+            // Make ship temporarily invulnerable
+            ship.invulnerable = 120; // 2 seconds at 60fps
+            
+            // Stop the ship
+            ship.speed = 0;
+          }
+          return;
+        }
+      }
+      
+      // Check collisions with fuel cells
+      for (let i = fuelCells.length - 1; i >= 0; i--) {
+        if (fuelCells[i].checkCollision()) {
+          // Collect fuel
+          fuel = min(fuel + fuelCells[i].fuelAmount, 100);
+          updateFuelDisplay();
+          
+          // Add score
+          score += floor(fuelCells[i].fuelAmount);
+          updateScoreDisplay();
+          
+          // Remove the fuel cell
+          fuelCells.splice(i, 1);
+        }
+      }
+    }
+    
+    // Game over function
+    function triggerGameOver(message) {
+      gameOver = true;
+      document.getElementById('game-over-message').innerText = message;
+      document.getElementById('final-score').innerText = score;
+      document.getElementById('game-over-panel').style.display = 'block';
+    }
+    
+    // Update score display
+    function updateScoreDisplay() {
+      document.getElementById('score').innerText = score;
+    }
+    
+    // Update lives display
+    function updateLivesDisplay() {
+      document.getElementById('lives').innerText = lives;
+    }
+    
+    // Update fuel display
+    function updateFuelDisplay() {
+      document.getElementById('fuel').innerText = floor(fuel);
+    }
+    
+    // Reset the game
+    function resetGame() {
+      // Reset game state
+      gameOver = false;
+      score = 0;
+      lives = 3;
+      fuel = 100;
+      
+      // Reset ship
+      ship.x = 0;
+      ship.y = 0;
+      ship.rotation = 0;
+      ship.speed = 0;
+      ship.invulnerable = 120; // Give brief invulnerability on restart
+      
+      // Clear game objects
+      lasers = [];
+      fuelCells = [];
+      explosions = [];
+      
+      // Generate new level
+      generateAsteroids();
+      
+      // Update displays
+      updateScoreDisplay();
+      updateLivesDisplay();
+      updateFuelDisplay();
+      
+      // Hide game over panel
+      document.getElementById('game-over-panel').style.display = 'none';
+    }
+    
+    function setup() {
+      let canvas = createCanvas(windowWidth, windowHeight);
+      canvas.parent('canvas-container');
+      
+      // Initialize game
+      generateStars(500);
+      generatePlanets(8);
+      generateAsteroids(20);
+      
+      // Set up event listeners for buttons
+      document.getElementById('btn-restart').addEventListener('click', resetGame);
+      document.getElementById('btn-try-again').addEventListener('click', resetGame);
+    }
+    
+    function draw() {
+      background(0);
+      
+      // Display stars
+      for (let star of stars) {
+        star.display();
+      }
+      
+      // Display planets
+      for (let planet of planets) {
+        planet.display();
+      }
+      
+      // Update and display fuel cells
+      for (let i = fuelCells.length - 1; i >= 0; i--) {
+        fuelCells[i].update();
+        fuelCells[i].display();
+      }
+      
+      // Update and display asteroids
+      for (let asteroid of asteroids) {
+        asteroid.update();
+        asteroid.display();
+      }
+      
+      // Update and display lasers
+      for (let i = lasers.length - 1; i >= 0; i--) {
+        lasers[i].update();
+        
+        // Check for laser collisions
+        if (lasers[i].checkCollisions()) {
+          lasers.splice(i, 1);
+          continue;
+        }
+        
+        lasers[i].display();
+        
+        // Remove lasers that have expired
+        if (lasers[i].isDead()) {
+          lasers.splice(i, 1);
+        }
+      }
+      
+      // Update and display explosions
+      for (let i = explosions.length - 1; i >= 0; i--) {
+        explosions[i].update();
+        explosions[i].display();
+        
+        if (explosions[i].isDead()) {
+          explosions.splice(i, 1);
+        }
+      }
+      
+      // Update and display ship
+      updateShip();
+      drawShip();
+      
+      // Spawn new asteroids occasionally
+      if (frameCount % 180 === 0 && asteroids.length < 30 && !gameOver) {
+        let angle = random(TWO_PI);
+        let distance = random(1000, 1500);
+        let x = ship.x + cos(angle) * distance;
+        let y = ship.y + sin(angle) * distance;
+        
+        asteroids.push(new Asteroid(x, y));
+      }
+      
+      // Check if out of fuel
+      if (fuel <= 0 && !gameOver) {
+        fuel = 0;
+        updateFuelDisplay();
+        
+        if (ship.speed < 0.5) {
+          triggerGameOver("Your ship ran out of fuel and is stranded in space!");
+        }
+      }
+    }
+    
+    function windowResized() {
+      resizeCanvas(windowWidth, windowHeight);
+    }
+  </script>
+</body>
+</html>

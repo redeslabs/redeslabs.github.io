@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="REDES is a creative innovation agency bridging business, culture, and healthcare through AI-powered solutions. Our three pillars—Rethink, Detego, and Sophia—weave together technological advancement with cultural authenticity, creating meaningful transformations for organizations and communities worldwide.">
+  <meta name="keywords" content="REDES, creative agency, AI innovation, cultural experiences, business transformation, healthcare technology, art, culture, creativity, artificial intelligence">
+  <meta name="author" content="REDES">
+  <title>REDES - Bridging Worlds Through Innovation, Culture & Health</title>  
+  <!-- google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Manrope:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="./assets/img/favicon.png">
+	<link rel="stylesheet" type="text/css" href="./assets/fonts/unicons/unicons.css">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+  <link rel="stylesheet" href="./assets/css/plugins.css">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./assets/css/colors/grape.css">
+  <link rel="preload" href="./assets/css/fonts/space.css" as="style" onload="this.rel='stylesheet'">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <style>
+  .swiper-container.nav-color .swiper-button, .swiper-container.nav-color .swiper-slide figure .item-link {
+      background: #605dbae6 !important;
+      color: #fff !important;
+  }
+  .swiper-container.nav-color .swiper-button:hover, .swiper-container.nav-color .swiper-slide figure .item-link:hover {
+      background: #605dba !important;
+  }
+  @media (max-width: 991.98px){
+      .navbar-expand-lg .navbar-collapse .dropdown-toggle:after {
+        color: #ffffff !important;
+      }
+  }
+  .font-serif {
+    font-family: 'Playfair Display', serif;
+  }
+  
+  /* Particles.js specific styling */
+  #particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    pointer-events: auto;
+  }
+  
+  /* Ensure content appears above particles */
+  .relative-z-10 {
+    position: relative;
+    z-index: 10;
+  }
+  
+  /* Gradient animation for REDES text */
+  .animate-gradient {
+    background-size: 300%;
+    -webkit-animation: animatedgradient 6s ease infinite alternate;
+    -moz-animation: animatedgradient 6s ease infinite alternate;
+    animation: animatedgradient 6s ease infinite alternate;
+  }
+
+  @keyframes animatedgradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* Fix for Unicons icons */
+  .uil {
+    font-family: 'Unicons' !important;
+  }
+  .uil-arrow-right:before {
+    content: "\e949";
+  }
+  
+  /* Navigation arrows for swiper */
+  .swiper-button-prev .uil-angle-left:before {
+    content: "\e93e";
+  }
+  .swiper-button-next .uil-angle-right:before {
+    content: "\e93f";
+  }
+  
+  /* Override default swiper button styling */
+  .swiper-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+  </style>
+</head>
+
+<body class="!bg-[#f0f0f8]">
+  <div class="grow shrink-0">
+    <header class="!absolute w-full">
+      <nav class="navbar navbar-expand-lg center-nav transparent navbar-light">
+        <div class="container xl:flex-row lg:flex-row !flex-nowrap items-center">
+          <div class="navbar-brand w-full">
+            <a href="./home.html">
+              <img src="./assets/img/redes-logo.png" srcset="./assets/img/redes-logo.png 4x" alt="image">
+            </a>
+          </div>
+          <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
+            <div class="offcanvas-header xl:hidden lg:hidden flex items-center justify-between flex-row p-6">
+              <h3 class="text-white xl:text-[1.5rem] !text-[calc(1.275rem_+_0.3vw)] !mb-0">Redes</h3>
+              <button type="button" class="btn-close btn-close-white mr-[-0.75rem] m-0 p-0 leading-none text-[#343f52] transition-all duration-[0.2s] ease-in-out border-0 motion-reduce:transition-none before:text-[1.05rem] before:content-['\ed3b'] before:w-[1.8rem] before:h-[1.8rem] before:leading-[1.8rem] before:shadow-none before:transition-[background] before:duration-[0.2s] before:ease-in-out before:flex before:justify-center before:items-center before:m-0 before:p-0 before:rounded-[100%] hover:no-underline bg-inherit before:bg-[rgba(255,255,255,.08)] before:font-Unicons hover:before:bg-[rgba(0,0,0,.11)] focus:outline-0" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body xl:!ml-auto lg:!ml-auto flex flex-col !h-full">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link font-bold tracking-[-0.01rem] hover:!text-[#605dba]" href="home.html">Redes</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link font-bold tracking-[-0.01rem] hover:!text-[#605dba]" href="rethink.html">Rethink</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link font-bold tracking-[-0.01rem] hover:!text-[#605dba]" href="detego.html">Detego</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link font-bold tracking-[-0.01rem] hover:!text-[#605dba]" href="sophia.html">Sophia</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link font-bold tracking-[-0.01rem] hover:!text-[#605dba]" href="about.html">Meet Us</a>
+                </li>
+              </ul>
+              <!-- /.navbar-nav -->
+              <div class="offcanvas-footer xl:hidden lg:hidden">
+                <div>
+                  <a href="mailto:hello@redeslabs" class="link-inverse">hello@redeslabs.com</a>
+                  <nav class="nav social social-white mt-4">
+                  <a class="text-[#cacaca] text-[1rem] transition-all duration-[0.2s] ease-in-out translate-y-0 motion-reduce:transition-none hover:translate-y-[-0.15rem] m-[0_.7rem_0_0]" href="#" aria-label="X">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5549 21H20.7996L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z"/></svg>
+                  </a>
+                  <a class="text-[#cacaca] text-[1rem] transition-all duration-[0.2s] ease-in-out translate-y-0 motion-reduce:transition-none hover:translate-y-[-0.15rem] m-[0_.7rem_0_0]" href="#" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg>
+                  </a>
+                  <a class="text-[#cacaca] text-[1rem] transition-all duration-[0.2s] ease-in-out translate-y-0 motion-reduce:transition-none hover:translate-y-[-0.15rem] m-[0_.7rem_0_0]" href="#" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"/></svg>
+                  </a>
+                  </nav>
+                  <!-- /.social -->
+                </div>
+              </div>
+              <!-- /.offcanvas-footer -->
+            </div>
+            <!-- /.offcanvas-body -->
+          </div>
+          <!-- /.navbar-collapse -->
+          <div class="navbar-other w-full !flex !ml-auto">
+            <ul class="navbar-nav !flex-row !items-center !ml-auto">
+              <li class="nav-item">
+                <nav class="nav social social-muted justify-end text-right">
+                  <a class="m-[0_0_0_.7rem] text-[1rem] transition-all duration-[0.2s] ease-in-out translate-y-0 hover:translate-y-[-0.15rem]" href="#" aria-label="X">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#1da1f2"><path d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5549 21H20.7996L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z"/></svg>
+                  </a>
+                  <a class="m-[0_0_0_.7rem] text-[1rem] transition-all duration-[0.2s] ease-in-out translate-y-0 hover:translate-y-[-0.15rem]" href="#" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#0077b5"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg>
+                  </a>
+                  <a class="m-[0_0_0_.7rem] text-[1rem] transition-all duration-[0.2s] ease-in-out translate-y-0 hover:translate-y-[-0.15rem]" href="#" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#d53581"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"/></svg>
+                  </a>
+                </nav>
+                <!-- /.social -->
+              </li>
+              <li class="nav-item xl:hidden lg:hidden">
+                <button class="hamburger offcanvas-nav-btn"><span></span></button>
+              </li>
+            </ul>
+            <!-- /.navbar-nav -->
+          </div>
+          <!-- /.navbar-other -->
+        </div>
+        <!-- /.container -->
+      </nav>
+      <!-- /.navbar -->
+    </header>
+    <!-- /header -->
+
+    
+    <section class="wrapper overflow-hidden relative">
+      <!-- Particles.js container -->
+      <div id="particles-js" class="absolute inset-0 z-0 h-screen w-full"></div>
+      
+      <div class="container pt-36 xl:pt-[12.5rem] lg:pt-[12.5rem] md:pt-[12.5rem] !text-center !relative z-10 relative-z-10">
+        <div class="absolute" style="top: -15%; left: 50%; transform: translateX(-50%);" data-cue="fadeIn"><img class="!rounded-[0.8rem]" src="./assets/img/photos/blurry.png" alt="image"></div>
+        <div class="flex flex-wrap mx-[-15px] !relative">
+          <div class="lg:w-8/12 xl:w-8/12 xxl:w-7/12 w-full flex-[0_0_auto] px-[15px] max-w-full !mx-auto !relative">
+            <div data-cues="slideInDown" data-group="page-title">
+              <h1 class="xl:text-[3.2rem] text-[calc(1.445rem_+_2.34vw)] font-semibold !leading-[1.15] mb-5 md:mx-10 lg:mx-0 xl:mx-0">Bridging worlds through <br /><span class="rotator-fade whitespace-normal text-[#605dba]">innovative <br /> vision.,cultural <br /> enlightenment.,intelligent <br /> health solutions.</span></h1>
+              <p class="lead !text-[1.2rem] !leading-[1.6] !mb-8">We are <span class="animate-gradient" style="font-size: 1.5rem; font-weight: 700; background-image: linear-gradient(to right, #c2410c, #3b82f6, #4ade80); -webkit-background-clip: text; background-clip: text; color: transparent;">REDES</span>, a creative network where technology meets humanity. We weave together business innovation, cultural celebration, and accessible healthcare through the threads of AI and artistic vision.</p>
+              
+              <p class="text-[0.85rem] !leading-[1.7] !font-normal pl-4 !mb-0 m-[0_0_1rem] relative p-0">"The measure of intelligence is the ability to change."</p>
+              <p class="text-[0.85rem] !leading-[1.7] !font-normal pl-4 !mb-0 m-[0_0_1rem] relative p-0">Albert Einstein</p>
+              
+            </div>
+          </div>
+          <!-- /column -->
+        </div>
+        <!-- /.row -->
+      </div>
+    </section>
+
+    <section class="wrapper overflow-hidden relative">
+      <!-- /.container -->
+      <div class="container-fluid xl:!px-0 pt-24 xl:pt-32 lg:pt-32 md:pt-32 pb-32 xl:pb-40 lg:pb-40 md:pb-40">
+        <div class="swiper-container swiper-auto relative !z-10" data-margin="40" data-nav="false" data-centered="true" data-loop="true" data-items-auto="true" data-autoplay="true" data-autoplay-timeout="5000">
+          <div class="swiper overflow-visible">
+            <div class="swiper-wrapper">
+              <!-- Rethink Slide -->
+              <div class="swiper-slide group relative">
+                <div class="absolute inset-0 flex items-center justify-center z-20">
+                  <span class="text-6xl font-serif italic text-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 drop-shadow-[0_0_8px_rgba(255,0,0,0.5)]">
+                    Rethink
+                  </span>
+                </div>
+                <figure class="rounded-[0.8rem] shadow-[rgba(30,34,40,0.02)_0_2px_1px,rgba(30,34,40,0.02)_0_4px_2px,rgba(30,34,40,0.02)_0_8px_4px,rgba(30,34,40,0.02)_0_16px_8px,rgba(30,34,40,0.03)_0_32px_16px]">
+                  <img class="!rounded-[0.8rem]" src="./assets/img/photos/rethink.gif" alt="Rethink">
+                  <a class="item-link absolute w-[2.2rem] h-[2.2rem] leading-[2.2rem] z-[1] transition-all duration-[0.3s] ease-[ease-in-out] opacity-0 text-white shadow-[0_0.25rem_0.75rem_rgba(30,34,40,0.02)] text-base flex items-center justify-center rounded-[100%] right-0 bottom-4 !bg-[rgba(96,93,186,.9)] group-hover:opacity-100 group-hover:right-4" href="./rethink.html">
+                    <i class="uil uil-arrow-right" style="font-family: 'Unicons'; font-weight: normal;"></i>
+                  </a>
+                </figure>
+              </div>
+      
+              <!-- Delve Slide -->
+              <div class="swiper-slide group relative">
+                <div class="absolute inset-0 flex items-center justify-center z-20">
+                  <span class="text-6xl font-serif italic text-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 drop-shadow-[0_0_8px_rgba(255,0,0,0.5)]">
+                    Detego
+                  </span>
+                </div>
+                <figure class="rounded-[0.8rem] shadow-[rgba(30,34,40,0.02)_0_2px_1px,rgba(30,34,40,0.02)_0_4px_2px,rgba(30,34,40,0.02)_0_8px_4px,rgba(30,34,40,0.02)_0_16px_8px,rgba(30,34,40,0.03)_0_32px_16px]">
+                  <img class="!rounded-[0.8rem]" src="./assets/img/photos/detego.gif" alt="Delve">
+                  <a class="item-link absolute w-[2.2rem] h-[2.2rem] leading-[2.2rem] z-[1] transition-all duration-[0.3s] ease-[ease-in-out] opacity-0 text-white shadow-[0_0.25rem_0.75rem_rgba(30,34,40,0.02)] text-base flex items-center justify-center rounded-[100%] right-0 bottom-4 !bg-[rgba(96,93,186,.9)] group-hover:opacity-100 group-hover:right-4" href="./detego.html">
+                    <i class="uil uil-arrow-right" style="font-family: 'Unicons'; font-weight: normal;"></i>
+                  </a>
+                </figure>
+              </div>
+
+              
+              <!-- Sophia Slide -->
+              <div class="swiper-slide group relative">
+                <div class="absolute inset-0 flex items-center justify-center z-20">
+                  <span class="text-6xl font-serif italic text-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 drop-shadow-[0_0_8px_rgba(255,0,0,0.5)]">
+                    Sophia
+                  </span>
+                </div>
+                <figure class="rounded-[0.8rem] shadow-[rgba(30,34,40,0.02)_0_2px_1px,rgba(30,34,40,0.02)_0_4px_2px,rgba(30,34,40,0.02)_0_8px_4px,rgba(30,34,40,0.02)_0_16px_8px,rgba(30,34,40,0.03)_0_32px_16px]">
+                  <img class="!rounded-[0.8rem]" src="./assets/img/photos/sophia.gif" alt="Sophia">
+                  <a class="item-link absolute w-[2.2rem] h-[2.2rem] leading-[2.2rem] z-[1] transition-all duration-[0.3s] ease-[ease-in-out] opacity-0 text-white shadow-[0_0.25rem_0.75rem_rgba(30,34,40,0.02)] text-base flex items-center justify-center rounded-[100%] right-0 bottom-4 !bg-[rgba(96,93,186,.9)] group-hover:opacity-100 group-hover:right-4" href="./sophia.html">
+                    <i class="uil uil-arrow-right" style="font-family: 'Unicons'; font-weight: normal;"></i>
+                  </a>
+                </figure>
+              </div>
+      
+            </div>
+            
+            <!-- Add navigation buttons -->
+            <div class="swiper-navigation custom-nav-container">
+                <div class="swiper-button swiper-button-prev custom-nav-btn custom-nav-prev text-white">
+                  <i class="uil uil-angle-left-b custom-nav-icon text-white" style="font-family: 'Unicons'; font-weight: normal;"></i>
+                </div>
+                <div class="swiper-button swiper-button-next custom-nav-btn custom-nav-next text-white">
+                  <i class="uil uil-angle-right-b custom-nav-icon text-white" style="font-family: 'Unicons'; font-weight: normal;"></i>
+                </div>
+            </div>
+            <!--/.swiper-wrapper -->
+          </div>
+          <!-- /.swiper -->
+          
+          <!-- Add pagination dots -->
+          <div class="swiper-controls">
+            <div class="swiper-pagination"></div>
+          </div>
+          
+        </div>
+        <!-- /.swiper-container -->
+      </div>
+<!-- /.container -->
+      <div class="container pt-6">
+        <div class="flex flex-wrap mx-[-15px]">
+          <div class="md:w-11/12 lg:w-8/12 xl:w-7/12 xxl:w-6/12 w-full flex-[0_0_auto] px-[15px] max-w-full !mx-auto !text-center">
+            <h2 class="text-[calc(1.345rem_+_1.14vw)] font-bold leading-[1.2] xl:text-[2.2rem] mb-4">Where Languages, Cultures & Technologies Converge</h2>
+            <p class="lead !text-[1.05rem] !leading-[1.55] !font-normal mb-12">REDES—Spanish for "networks"—is our acronym for Re.De.S., bridging English (Rethink), Latin (Detego), and Greek (Sophia). This linguistic fusion reflects our mission: connecting diverse worlds through AI-driven innovation that honors cultural heritage.</p>
+          </div>
+          <!-- /column -->
+        </div>
+        <!-- /.row -->
+        <div class="flex flex-wrap mx-[-15px] xl:mx-[-20px] lg:mx-[-20px] md:mx-[-20px] mt-[-40px] !text-center !mb-[4.5rem] xl:!mb-[7rem] lg:!mb-[7rem] md:!mb-[7rem]">
+          <div class="md:w-6/12 lg:w-4/12 xl:w-4/12 w-full flex-[0_0_auto] px-[15px] xl:px-[20px] lg:px-[20px] md:px-[20px] mt-[40px] max-w-full">
+            <div class="svg-bg svg-bg-lg bg-[rgba(255,255,255)] opacity-100 !rounded-[0.8rem] shadow-[rgba(30,34,40,0.02)_0_2px_1px,rgba(30,34,40,0.02)_0_4px_2px,rgba(30,34,40,0.02)_0_8px_4px,rgba(30,34,40,0.02)_0_16px_8px,rgba(30,34,40,0.03)_0_32px_16px] !mb-6"> <img src="./assets/img/icons/lamp.svg" class="svg-inject icon-svg solid-duo text-grape-fuchsia" alt="image"> </div>
+            <h3>Rethink</h3>
+            <p class="!mb-3">Guiding businesses through the AI revolution with vision and strategy. We help transform ideas into thriving enterprises, consulting on digital innovation while maintaining your core values and cultural identity.</p>
+            <a href="rethink.html" class="more hover !text-[#605dba]">Learn More</a>
+          </div>
+          <!--/column -->
+          <div class="md:w-6/12 lg:w-4/12 xl:w-4/12 w-full flex-[0_0_auto] px-[15px] xl:px-[20px] lg:px-[20px] md:px-[20px] mt-[40px] max-w-full">
+            <div class="svg-bg svg-bg-lg bg-[rgba(255,255,255)] opacity-100 !rounded-[0.8rem] shadow-[rgba(30,34,40,0.02)_0_2px_1px,rgba(30,34,40,0.02)_0_4px_2px,rgba(30,34,40,0.02)_0_8px_4px,rgba(30,34,40,0.02)_0_16px_8px,rgba(30,34,40,0.03)_0_32px_16px] !mb-6"> <img src="./assets/img/icons/globe-2.svg" class="svg-inject icon-svg solid-duo text-grape-fuchsia" alt="image"> </div>
+            <h3>Detego</h3>
+            <p class="!mb-3">Illuminating art, culture, and social heritage through immersive experiences. We bring to light the brilliance of places, historical events, and cultural icons while educating curious minds of all generations.</p>
+            <a href="detego.html" class="more hover !text-[#605dba]">Learn More</a>
+          </div>
+          <!--/column -->
+          <div class="md:w-6/12 lg:w-4/12 xl:w-4/12 w-full flex-[0_0_auto] px-[15px] xl:px-[20px] lg:px-[20px] md:px-[20px] mt-[40px] max-w-full">
+            <div class="svg-bg svg-bg-lg bg-[rgba(255,255,255)] opacity-100 !rounded-[0.8rem] shadow-[rgba(30,34,40,0.02)_0_2px_1px,rgba(30,34,40,0.02)_0_4px_2px,rgba(30,34,40,0.02)_0_8px_4px,rgba(30,34,40,0.02)_0_16px_8px,rgba(30,34,40,0.03)_0_32px_16px] !mb-6"> <img src="./assets/img/icons/love.svg" class="svg-inject icon-svg solid-duo text-grape-fuchsia" alt="image"> </div>
+            <h3>Sophia</h3>
+            <p class="!mb-3">Creating intelligent health solutions accessible to all. We leverage the power of AI to develop biotech applications and platforms that revolutionize healthcare delivery for people of every age and background.</p>
+            <a href="sophia.html" class="more hover !text-[#605dba]">Learn More</a>
+          </div>
+        </div>
+        <!--/.row -->
+      </div>
+      <!-- /.container -->
+    </section>
+
+    <!-- /section -->
+    <section class="wrapper bg-repeat bg-fixed bg-image section-frame xl:mx-[1.5rem] xl:rounded-[1rem] lg:mx-[1.5rem] lg:rounded-[1rem] md:mx-[1.5rem] md:rounded-[1rem]" data-image-src="./assets/img/pattern.png">
+      <div class="container pt-20 xl:pt-28 lg:pt-28 md:pt-28 pb-24 xl:pb-32 lg:pb-32 md:pb-32">
+        <div class="flex flex-wrap mx-[-15px] xl:mx-0 lg:mx-0 mt-[-50px] items-center mb-[8rem]">
+          <div class="xl:w-6/12 lg:w-6/12 w-full flex-[0_0_auto] px-[15px] max-w-full xl:!order-2 xl:!ml-auto lg:!order-2 lg:!ml-auto xl:px-0 lg:px-0 mt-[50px]">
+            <div class="card !rounded-[0.8rem] xl:!mr-6 lg:!mr-6 !bg-[#e6e5f4]">
+              <div class="card-body p-6">
+                <div class="flex flex-row">
+                  <div>
+                    <span class="icon btn btn-block btn-lg !shadow-[rgba(30,34,40,0.02)_0_2px_1px,rgba(30,34,40,0.02)_0_4px_2px,rgba(30,34,40,0.02)_0_8px_4px,rgba(30,34,40,0.02)_0_16px_8px,rgba(30,34,40,0.03)_0_32px_16px] !rounded-[0.8rem] btn-white pointer-events-none !mr-4"><span class="number text-[#605dba]">01</span></span>
+                  </div>
+                  <div>
+                    <h3 class="!mb-1 text-[#605dba]">Listen & Understand</h3>
+                    <p class="!mb-0">We start by deeply understanding your needs, challenges, and aspirations.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card !rounded-[0.8rem] xl:!ml-16 lg:!ml-16 mt-6 !bg-[#fbe7f3]">
+              <div class="card-body p-6">
+                <div class="flex flex-row">
+                  <div>
+                    <span class="icon btn btn-block btn-lg !shadow-[rgba(30,34,40,0.02)_0_2px_1px,rgba(30,34,40,0.02)_0_4px_2px,rgba(30,34,40,0.02)_0_8px_4px,rgba(30,34,40,0.02)_0_16px_8px,rgba(30,34,40,0.03)_0_32px_16px] !rounded-[0.8rem] btn-white pointer-events-none !mr-4"><span class="number text-[#e668b3]">02</span></span>
+                  </div>
+                  <div>
+                    <h3 class="!mb-1 text-[#e668b3]">Design & Innovate</h3>
+                    <p class="!mb-0">We craft tailored solutions that blend technology with cultural sensitivity.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card !rounded-[0.8rem] xl:mx-6 lg:mx-6 mt-6 !bg-[#e1f6f0]">
+              <div class="card-body p-6">
+                <div class="flex flex-row">
+                  <div>
+                    <span class="icon btn btn-block btn-lg !shadow-[rgba(30,34,40,0.02)_0_2px_1px,rgba(30,34,40,0.02)_0_4px_2px,rgba(30,34,40,0.02)_0_8px_4px,rgba(30,34,40,0.02)_0_16px_8px,rgba(30,34,40,0.03)_0_32px_16px] !rounded-[0.8rem] btn-white pointer-events-none !mr-4"><span class="number text-[#45c4a0]">03</span></span>
+                  </div>
+                  <div>
+                    <h3 class="!mb-1 text-[#45c4a0]">Transform & Grow</h3>
+                    <p class="!mb-0">We implement solutions that drive meaningful change and sustainable growth.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="xl:w-5/12 lg:w-5/12 w-full flex-[0_0_auto] px-[15px] max-w-full text-[#cacaca] xl:px-0 lg:px-0 mt-[50px]">
+            <h2 class="text-[calc(1.345rem_+_1.14vw)] font-bold leading-[1.2] xl:text-[2.2rem] mb-3 text-white">Your Transformative Journey</h2>
+            <p class="lead !text-[1.05rem] !leading-[1.55] !font-normal xl:pr-5 lg:pr-5">Through our three interconnected pillars, we navigate the complex landscape where tradition meets innovation.</p>
+            <p>At REDES, we don't just consult—we co-create. Whether reimagining a business strategy through Rethink, unveiling cultural treasures with Detego, or developing AI-powered health solutions via Sophia, we blend art with intelligence.</p>
+            <p class="!mb-6">Our multicultural approach draws from diverse linguistic traditions just as we draw from diverse technologies, creating harmonious connections between seemingly separate worlds.</p>
+          </div>
+        </div>
+        
+        <div class="flex flex-wrap mx-[-15px] xl:mx-0 lg:mx-0 mt-[-50px] items-center text-[#cacaca]">
+          <div class="xl:w-10/12 lg:w-10/12 w-full flex-[0_0_auto] px-[15px] max-w-full mx-auto xl:px-0 lg:px-0 mt-[50px]">
+            <h2 class="text-[calc(1.345rem_+_1.14vw)] font-bold leading-[1.2] xl:text-[2.2rem] mb-3 text-white text-center">Creating Cross-Cultural Impact</h2>
+            <p class="lead !text-[1.05rem] !leading-[1.55] !font-normal xl:px-5 lg:px-5 text-center">Our success stems from weaving together diverse languages, cultures, and technologies into a unified network of innovation.</p>
+            <p class="!mb-6 text-center">From AI-guided business transformations to culturally immersive experiences and accessible health solutions, we create bridges where boundaries once existed—honoring the past while building the future.</p>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TODO: Add a section for the team -->
+
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="wrapper bg-repeat bg-fixed bg-image section-frame xl:mx-6 xl:rounded-[1rem] lg:mx-6 lg:rounded-[1rem] md:mx-6 md:rounded-[1rem]" data-image-src="./assets/img/pattern.png">
+    <div class="container pb-16 xl:pb-20 lg:pb-20 md:pb-20">
+      <div class="card image-wrapper bg-full bg-image bg-overlay xl:mx-5 lg:mx-5 md:mx-5 !rounded-[0.8rem] overflow-hidden [background-size:100%] bg-[center_center] bg-no-repeat bg-scroll relative z-0 before:content-[''] before:block before:absolute before:z-[1] before:w-full before:h-full before:rounded-[0.4rem] before:left-0 before:top-0 before:bg-[rgba(30,34,40,.5)] -translate-y-2/4" data-image-src="./assets/img/photos/bg27.jpg">
+        <div class="card-body p-6 flex-row text-center xl:!justify-between lg:!justify-between md:!justify-between xl:flex xl:!items-center lg:flex lg:!items-center xl:!p-12 lg:!p-12 md:!p-12 xl:!text-left lg:!text-left">
+          <h3 class="text-[calc(1.345rem_+_1.14vw)] !font-semibold !leading-[1.2] xl:text-[2.2rem] !mb-6 xl:!mb-0 lg:!mb-0 lg:pr-[2.5rem] xl:pr-[1.25rem] xxl:pr-[8rem] text-white">Join the <span class="text-[#e668b3]">Re</span><span class="text-[#605dba]">De</span><span class="text-[#45c4a0]">S</span> network where tradition meets innovation across cultures.</h3>          
+          <a href="about.html" class="btn btn-lg btn-white !rounded-[0.8rem] !mb-0 whitespace-nowrap">Let's Connect</a>
+        </div>
+        <!--/.card-body -->
+      </div>
+      <!--/.card -->
+      <div class="text-[#cacaca] xl:mx-5 lg:mx-5 md:mx-5 mt-[-5rem] xl:!mt-0 lg:!mt-0">
+        <div class="flex flex-wrap mx-[-15px] mt-[-30px] xl:mt-0 lg:mt-0">
+          <div class="xl:w-4/12 lg:w-4/12 w-full flex-[0_0_auto] px-[15px] max-w-full text-[#cacaca]">
+            <div class="widget">
+              <h3 class="h2 !mb-3 !text-white !leading-[1.35]">Bridging worlds, connecting futures.</h3>
+              <p class="!mb-2 italic"><span style="color: #e668b3;">Connecting worlds</span> · <span style="color: #605dba;">Conectando mundos</span> · <span style="color: #45c4a0;">Συνδέοντας Κόσμους</span></p>
+              <p class="!mb-5 text-[#cacaca]">REDES is where cultures connect. Our name reflects our mission: <span class="text-[#e668b3]">Re</span>think transforms business with AI, <span class="text-[#605dba]">De</span>tego reveals cultural heritage, and <span class="text-[#45c4a0]">S</span>ophia delivers accessible healthcare. We bridge traditions and innovation across languages to build an inclusive future.</p>              
+              <p class="!mb-1">© 2025 REDES<br><span class="text-xs" style="color: rgba(96, 93, 186, 0.8) !important;">Connecting worlds across languages and cultures</span></p>
+              <nav class="nav social social-white">
+                <a class="m-[0_.7rem_0_0] text-[1rem] transition-all duration-[0.2s] ease-in-out translate-y-0 hover:translate-y-[-0.15rem]" href="#" aria-label="X">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5549 21H20.7996L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z"/></svg>
+                </a>
+                <a class="m-[0_.7rem_0_0] text-[1rem] transition-all duration-[0.2s] ease-in-out translate-y-0 hover:translate-y-[-0.15rem]" href="#" aria-label="LinkedIn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg>
+                </a>
+                <a class="m-[0_.7rem_0_0] text-[1rem] transition-all duration-[0.2s] ease-in-out translate-y-0 hover:translate-y-[-0.15rem]" href="#" aria-label="Instagram">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"/></svg>
+                </a>
+              </nav>
+              <!-- /.social -->
+            </div>
+            <!-- /.widget -->
+          </div>
+          <!-- /column -->
+          <div class="md:w-4/12 lg:w-2/12 xl:w-2/12 w-full flex-[0_0_auto] px-[15px] max-w-full lg:!ml-[16.66666667%] xl:!ml-[16.66666667%] mt-[30px] xl:mt-0 lg:mt-0">
+            
+            <!-- /.widget -->
+          </div>
+          <!-- /column -->
+          <div class="md:w-4/12 lg:w-2/12 xl:w-2/12 w-full flex-[0_0_auto] px-[15px] max-w-full mt-[30px] xl:mt-0 lg:mt-0">
+            <div class="widget">
+              <h4 class="widget-title !mb-[.75rem] !text-[.95rem] !leading-[1.45] !text-white">Explore</h4>
+              <ul class="pl-0 list-none text-inherit !mb-0">
+                <li><a class="text-white hover:text-[#605dba]" href="about.html">Meet Us</a></li>
+                <li class="mt-[0.35rem]"><a class="text-white hover:text-[#605dba]" href="rethink.html">Rethink</a></li>
+                <li class="mt-[0.35rem]"><a class="text-white hover:text-[#605dba]" href="detego.html">Detego</a></li>
+                <li class="mt-[0.35rem]"><a class="text-white hover:text-[#605dba]" href="sophia.html">Sophia</a></li>
+              </ul>
+            </div>
+            <!-- /.widget -->
+          </div>
+          <!-- /column -->
+          <div class="md:w-4/12 lg:w-2/12 xl:w-2/12 w-full flex-[0_0_auto] px-[15px] max-w-full mt-[30px] xl:mt-0 lg:mt-0">
+            <div class="widget">
+              <h4 class="widget-title !mb-[.75rem] !text-[.95rem] !leading-[1.45] !text-white">Get in Touch</h4>
+              <address class="not-italic leading-[inherit] mb-4">Email us with your innovative ideas, partnership opportunities, or questions. We're excited to collaborate!</address>
+              <a href="mailto:hello@redeslabs.com" class="text-white hover:text-[#605dba]">hello@redeslabs.com</a>
+            </div>
+            <!-- /.widget -->
+          </div>
+          <!-- /column -->
+        </div>
+        <!--/.row -->
+      </div>
+    </div>
+    <!-- /.container -->
+  </footer>
+  <div class="xl:pb-6 lg:pb-6 md:pb-6"></div>
+  <!-- progress wrapper -->
+  <div class="progress-wrap fixed w-[2.3rem] h-[2.3rem] cursor-pointer block shadow-[inset_0_0_0_0.1rem_rgba(128,130,134,0.25)] z-[1010] opacity-0 invisible translate-y-3 transition-all duration-[0.2s] ease-[linear,margin-right] delay-[0s] rounded-[100%] right-6 bottom-6 motion-reduce:transition-none after:absolute after:content-['\e951'] after:text-center after:leading-[2.3rem] after:text-[1.2rem] after:text-[#605dba] after:h-[2.3rem] after:w-[2.3rem] after:cursor-pointer after:block after:z-[1] after:transition-all after:duration-[0.2s] after:ease-linear after:left-0 after:top-0 motion-reduce:after:transition-none after:font-Unicons">
+    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+      <path class="fill-none stroke-[#605dba] stroke-[4] box-border transition-all duration-[0.2s] ease-linear motion-reduce:transition-none" d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+    </svg>
+  </div>
+  <script src="./assets/js/plugins.js"></script>
+  <script src="./assets/js/theme.js"></script>
+  
+  <!-- particles.js library -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    // Wait for both DOM content and window to fully load for better reliability
+    window.addEventListener('load', function() {
+      particlesJS('particles-js', {
+        "particles": {
+          "number": {
+            "value": 100,
+            "density": {
+              "enable": true,
+              "value_area": 1000
+            }
+          },
+          "color": {
+            "value": ["#605dba", "#e668b3", "#4470cf"]
+          },
+          "shape": {
+            "type": "circle",
+            "stroke": {
+              "width": 0,
+              "color": "#000000"
+            },
+            "polygon": {
+              "nb_sides": 5
+            }
+          },
+          "opacity": {
+            "value": 0.6,
+            "random": true,
+            "anim": {
+              "enable": true,
+              "speed": 1,
+              "opacity_min": 0.1,
+              "sync": false
+            }
+          },
+          "size": {
+            "value": 5,
+            "random": true,
+            "anim": {
+              "enable": false,
+              "speed": 40,
+              "size_min": 0.1,
+              "sync": false
+            }
+          },
+          "line_linked": {
+            "enable": true,
+            "distance": 150,
+            "color": "#605dba",
+            "opacity": 0.4,
+            "width": 1
+          },
+          "move": {
+            "enable": true,
+            "speed": 1,
+            "direction": "none",
+            "random": true,
+            "straight": false,
+            "out_mode": "out",
+            "bounce": false,
+            "attract": {
+              "enable": true,
+              "rotateX": 600,
+              "rotateY": 1200
+            }
+          }
+        },
+        "interactivity": {
+          "detect_on": "window",
+          "events": {
+            "onhover": {
+              "enable": true,
+              "mode": "repulse"
+            },
+            "onclick": {
+              "enable": true,
+              "mode": "push"
+            },
+            "resize": true
+          },
+          "modes": {
+            "grab": {
+              "distance": 180,
+              "line_linked": {
+                "opacity": 1
+              }
+            },
+            "bubble": {
+              "distance": 400,
+              "size": 40,
+              "duration": 2,
+              "opacity": 8,
+              "speed": 5
+            },
+            "repulse": {
+              "distance": 100,
+              "duration": 0.4
+            },
+            "push": {
+              "particles_nb": 4
+            },
+            "remove": {
+              "particles_nb": 2
+            }
+          }
+        },
+        "retina_detect": true
+      });
+
+      // Make sure the particles container has proper styling
+      const particlesContainer = document.getElementById('particles-js');
+      if (particlesContainer) {
+        particlesContainer.style.position = 'absolute';
+        particlesContainer.style.top = '0';
+        particlesContainer.style.left = '0';
+        particlesContainer.style.width = '100%';
+        particlesContainer.style.height = '100%';
+        particlesContainer.style.zIndex = '0';
+        particlesContainer.style.pointerEvents = 'auto'; // Allow mouse interaction
+      }
+    });
+  </script>
+</body>
+
+</html>
