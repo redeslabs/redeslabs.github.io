@@ -263,38 +263,6 @@ function highlightRandomBase() {
     dnaStrands[index].highlight = 1;
 }
 
-function mousePressed() {
-    // Find closest base pair to mouse
-    let mouseYPos = mouseY - height/2;
-    let pairSpacing = DNA_HEIGHT / dnaStrands.length;
-    let index = floor(map(mouseYPos, -DNA_HEIGHT/2, DNA_HEIGHT/2, 0, dnaStrands.length));
-    
-    if (index >= 0 && index < dnaStrands.length) {
-        // Highlight clicked base pair
-        dnaStrands[index].highlight = 1;
-        
-        // Add particles at this location
-        let y = -DNA_HEIGHT/2 + index * pairSpacing;
-        for (let i = 0; i < 20; i++) {
-            let p = createParticle();
-            p.y = y;
-            particles.push(p);
-            
-            // Remove oldest particle
-            if (particles.length > PARTICLE_COUNT) {
-                particles.shift();
-            }
-        }
-    }
-}
-
-function mouseDragged() {
-    // Add rotation based on mouse movement
-    angleOffset += (mouseX - pmouseX) * 0.01;
-    
-    return false; // Prevent default
-}
-
 function windowResized() {
     // Resize canvas to fit container
     const container = document.getElementById('canvas-container');
