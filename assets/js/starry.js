@@ -280,6 +280,9 @@ function mouseMoved() {
 }
 
 function windowResized() {
+    // Skip resize handling on mobile devices to prevent scroll triggering reset
+    if (isMobile) return;
+    
     container = document.getElementById('starry-canvas-container');
     if (!container) return;
 
