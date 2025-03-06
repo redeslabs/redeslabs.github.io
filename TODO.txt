@@ -1,3 +1,5 @@
+// Add social media links on each page both header and footer.
+
 // TESTIMONIALS SECTION - AWAITING REAL DATA
 // 
 // NOTE: The "Voices from Our Community" section in index.html is currently using demo content.
