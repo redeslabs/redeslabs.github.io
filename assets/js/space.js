@@ -6,6 +6,7 @@ let acceleration = 0;
 let targetSpeed = 2;
 let canvas;
 let speedControlsAdded = false;
+let isMobile = false; // Flag for mobile detection
 
 // Add planets array and related variables
 let planets = [];
@@ -40,6 +41,9 @@ function setup() {
   // Try to get the container elements
   const container = document.getElementById('canvas-container');
   const spaceContainer = document.getElementById('space-container');
+  
+  // Check if device is mobile
+  isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   
   let w, h;
   
@@ -903,7 +907,6 @@ function addSpeedControls(container) {
   if (speedControlsAdded) return;
   
   // Check if mobile device - don't add controls on mobile
-  const isMobile = window.innerWidth <= 768;
   if (isMobile) {
     // Don't add controls on mobile devices
     speedControlsAdded = true;
@@ -1062,6 +1065,9 @@ function addSpeedControls(container) {
 }
 
 function keyPressed() {
+  // Skip keyboard interactions on mobile devices
+  if (isMobile) return true;
+  
   // Check if canvas or its container is focused
   const isFocused = document.activeElement === canvas.elt ||
                     document.activeElement === document.getElementById('canvas-container') ||
