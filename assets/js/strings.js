@@ -41,6 +41,9 @@ function setup() {
 }
 
 function windowResized() {
+  // Skip resize handling on mobile devices to prevent scroll triggering reset
+  if (isMobile) return;
+  
   heroSection = document.getElementById('hero');
   container = document.getElementById('strings-canvas-container');
   if (!container || !heroSection) return;
