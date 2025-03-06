@@ -1,4 +1,5 @@
 // Add social media links on each page both header and footer.
+// Create google form to add to contact buttons at let's connect and partner buttons.
 
 // TESTIMONIALS SECTION - AWAITING REAL DATA
 // 
