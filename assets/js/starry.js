@@ -6,6 +6,7 @@ let flowField = [];
 let particles = [];
 let stars = [];
 let canvas, container;
+let isMobile = false; // Flag for mobile detection
 
 // Color palettes inspired by *The Starry Night*
 const SKY_COLORS = [
@@ -53,6 +54,9 @@ function setup() {
     canvas = createCanvas(w, h);
     canvas.parent('starry-canvas-container');
     background(19, 24, 98);
+
+    // Check if device is mobile
+    isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
     noiseSeed(42);
     createFlowField();
@@ -258,6 +262,9 @@ function drawMoon() {
 }
 
 function mouseMoved() {
+    // Skip user interaction on mobile devices
+    if (isMobile) return false;
+    
     if (mouseX >= 0 && mouseX <= width && mouseY >= 0 && mouseY < height) {
         for (let i = 0; i < 3; i++) {
             createParticle(
