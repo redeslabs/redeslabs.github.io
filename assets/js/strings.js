@@ -19,6 +19,7 @@ let originalPositions = []; // Store initial positions
 let time = 0;
 let canvas, container, heroSection;
 let mouseHasMoved = false; // Add this flag to track if mouse has moved
+let isMobile = false; // Flag for mobile detection
 
 // p5.js functions
 function setup() {
@@ -32,6 +33,9 @@ function setup() {
   
   canvas = createCanvas(w, h);
   canvas.parent('strings-canvas-container');
+  
+  // Check if device is mobile
+  isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   
   setupThreads();
 }
@@ -153,8 +157,8 @@ function updateSimulation() {
     }
   }
 
-  // Modified mouse interaction code to only apply when mouse has actually moved
-  if (mouseHasMoved && mouseX >= 0 && mouseX <= width && mouseY >= 0 && mouseY < height) {
+  // Modified mouse interaction code to only apply when mouse has moved and not on mobile
+  if (!isMobile && mouseHasMoved && mouseX >= 0 && mouseX <= width && mouseY >= 0 && mouseY < height) {
     let mousePos = createVector(mouseX, mouseY);
     for (let thread of threads) {
       for (let p of thread) {
