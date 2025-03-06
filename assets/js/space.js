@@ -42,7 +42,7 @@ function setup() {
   const container = document.getElementById('canvas-container');
   const spaceContainer = document.getElementById('space-container');
   
-  // Check if device is mobile
+  // Check if device is mobile using user agent
   isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   
   let w, h;
@@ -906,7 +906,7 @@ function drawVanGoghWave(planet, wave, size, brightness, ringIndex, drawBackHalf
 function addSpeedControls(container) {
   if (speedControlsAdded) return;
   
-  // Check if mobile device - don't add controls on mobile
+  // Check if mobile device - use the global flag
   if (isMobile) {
     // Don't add controls on mobile devices
     speedControlsAdded = true;
@@ -1099,6 +1099,9 @@ function keyPressed() {
 }
 
 function windowResized() {
+  // Skip resize handling on mobile devices to prevent scroll triggering reset
+  if (isMobile) return;
+  
   // Try to get the container elements
   const container = document.getElementById('canvas-container');
   const spaceContainer = document.getElementById('space-container');
@@ -1138,7 +1141,7 @@ function windowResized() {
 
 // Automate speed variations for more interesting effect
 setInterval(() => {
-  if (random() < 0.2 && !mouseIsPressed) {
+  if (random() < 0.2 && !isMobile && !mouseIsPressed) {
     // More gentle speed changes
     targetSpeed = constrain(targetSpeed + random(-1, 1.5), 1, 15);
     acceleration = random(0.03, 0.1);
