@@ -1,0 +1,93 @@
+// TESTIMONIALS SECTION - AWAITING REAL DATA
+// 
+// NOTE: The "Voices from Our Community" section in index.html is currently using demo content.
+// We are missing real testimonials and will update this section once more data is gathered from 
+// actual community partners and clients. The current testimonials serve as placeholders to 
+// demonstrate the layout and design. 
+// 
+// Once real testimonials are collected, we will replace the demo content with original quotes,
+// names, titles, and potentially profile images of real community members and partners.
+//
+// LOCATION: This refers to the testimonials section in the index.html file where the comment below is found:
+
+// The below section at where the TODO comment is on the index.html
+<section class="overflow-hidden">
+      <div class="container pt-24 xl:pt-32 lg:pt-32 md:pt-32 pb-40 xl:pb-60 lg:pb-60 md:pb-60">
+        <div class="flex flex-wrap mx-[-15px] xl:mx-[-35px] lg:mx-[-20px] mt-[-50px] items-center mb-20 xl:!mb-[7rem] lg:!mb-[7rem] md:!mb-[7rem]">
+          <div class="xl:w-7/12 lg:w-7/12 w-full flex-[0_0_auto] px-[15px] max-w-full !relative xl:px-[35px] lg:px-[20px] mt-[50px]">
+            <div class="absolute hidden xl:block lg:block md:block" style="top: 50%; left: 50%; width: 130%; height: auto; transform: translate(-50%,-50%); z-index:-1"><img class="w-full" src="./assets/img/photos/blurry.png" alt="decorative background"></div>
+            <div class="flex flex-wrap mx-[-15px] xl:mx-[-12.5px] lg:mx-[-12.5px] md:mx-[-12.5px] mt-[-25px]">
+              <div class="md:w-6/12 lg:w-6/12 xl:w-5/12 w-full flex-[0_0_auto] px-[15px] max-w-full !self-end xl:px-[12.5px] lg:px-[12.5px] md:px-[12.5px] mt-[25px]">
+                <div class="card !shadow-[rgba(30,34,40,0.02)_0_2px_1px,rgba(30,34,40,0.02)_0_4px_2px,rgba(30,34,40,0.02)_0_8px_4px,rgba(30,34,40,0.02)_0_16px_8px,rgba(30,34,40,0.03)_0_32px_16px] !rounded-[0.8rem]">
+                  <div class="card-body flex-[1_1_auto] p-[40px]">
+                    <blockquote class="text-[0.85rem] !leading-[1.7] !font-normal pl-4 icon !mb-0 m-[0_0_1rem] relative p-0 border-0 before:content-['\201d'] before:absolute before:top-[-1.5rem] before:left-[-0.9rem] before:text-[rgba(52,63,82,0.05)] before:text-[10rem] before:leading-none before:z-[1]">
+                      <p>"REDES helped us digitize our traditional artisan marketplace while preserving the cultural essence of our crafts. Our community's heritage now reaches a global audience."</p>
+                      <div class="flex items-center text-left">
+                        <div class="info p-0">
+                          <h5 class="!mb-1 text-[.9rem] !leading-[1.5]">Maria González</h5>
+                          <p class="!mb-0 text-[.8rem]">Artisan Cooperative Director</p>
+                        </div>
+                      </div>
+                    </blockquote>
+                  </div>
+                </div>
+              </div>
+
+              <div class="xl:w-6/12 lg:w-6/12 md:w-6/12 w-full flex-[0_0_auto] px-[15px] max-w-full !self-end xl:px-[12.5px] lg:px-[12.5px] md:px-[12.5px] mt-[25px]">
+                <div class="card !shadow-[rgba(30,34,40,0.02)_0_2px_1px,rgba(30,34,40,0.02)_0_4px_2px,rgba(30,34,40,0.02)_0_8px_4px,rgba(30,34,40,0.02)_0_16px_8px,rgba(30,34,40,0.03)_0_32px_16px] !rounded-[0.8rem]">
+                  <div class="card-body flex-[1_1_auto] p-[40px]">
+                    <blockquote class="text-[0.85rem] !leading-[1.7] !font-normal pl-4 icon !mb-0 m-[0_0_1rem] relative p-0 border-0 before:content-['\201d'] before:absolute before:top-[-1.5rem] before:left-[-0.9rem] before:text-[rgba(52,63,82,0.05)] before:text-[10rem] before:leading-none before:z-[1]">
+                      <p>"The accessibility features REDES implemented in our healthcare platform have made it possible for our elderly community members to access vital services independently."</p>
+                      <div class="flex items-center text-left">
+                        <div class="info p-0">
+                          <h5 class="!mb-1 text-[.9rem] !leading-[1.5]">Dr. Sarah Chen</h5>
+                          <p class="!mb-0 text-[.8rem]">Community Health Director</p>
+                        </div>
+                      </div>
+                    </blockquote>
+                  </div>
+                </div>
+              </div>
+
+              <div class="md:w-6/12 lg:w-6/12 xl:w-5/12 flex-[0_0_auto] px-[15px] max-w-full xl:!ml-[8.33333333%] xl:px-[12.5px] lg:px-[12.5px] md:px-[12.5px] mt-[25px]">
+                <div class="card !shadow-[rgba(30,34,40,0.02)_0_2px_1px,rgba(30,34,40,0.02)_0_4px_2px,rgba(30,34,40,0.02)_0_8px_4px,rgba(30,34,40,0.02)_0_16px_8px,rgba(30,34,40,0.03)_0_32px_16px] !rounded-[0.8rem]">
+                  <div class="card-body flex-[1_1_auto] p-[40px]">
+                    <blockquote class="text-[0.85rem] !leading-[1.7] !font-normal pl-4 icon !mb-0 m-[0_0_1rem] relative p-0 border-0 before:content-['\201d'] before:absolute before:top-[-1.5rem] before:left-[-0.9rem] before:text-[rgba(52,63,82,0.05)] before:text-[10rem] before:leading-none before:z-[1]">
+                      <p>"REDES understood our need to modernize while maintaining our traditional values. They created a digital platform that strengthens our community bonds."</p>
+                      <div class="flex items-center text-left">
+                        <div class="info p-0">
+                          <h5 class="!mb-1 text-[.9rem] !leading-[1.5]">Amir Patel</h5>
+                          <p class="!mb-0 text-[.8rem]">Cultural Center Director</p>
+                        </div>
+                      </div>
+                    </blockquote>
+                  </div>
+                </div>
+              </div>
+
+              <div class="xl:w-6/12 lg:w-6/12 md:w-6/12 w-full flex-[0_0_auto] px-[15px] max-w-full !self-start xl:px-[12.5px] lg:px-[12.5px] md:px-[12.5px] mt-[25px]">
+                <div class="card !shadow-[rgba(30,34,40,0.02)_0_2px_1px,rgba(30,34,40,0.02)_0_4px_2px,rgba(30,34,40,0.02)_0_8px_4px,rgba(30,34,40,0.02)_0_16px_8px,rgba(30,34,40,0.03)_0_32px_16px] !rounded-[0.8rem]">
+                  <div class="card-body flex-[1_1_auto] p-[40px]">
+                    <blockquote class="text-[0.85rem] !leading-[1.7] !font-normal pl-4 icon !mb-0 m-[0_0_1rem] relative p-0 border-0 before:content-['\201d'] before:absolute before:top-[-1.5rem] before:left-[-0.9rem] before:text-[rgba(52,63,82,0.05)] before:text-[10rem] before:leading-none before:z-[1]">
+                      <p>"The educational platform REDES developed for our indigenous youth perfectly balances modern learning tools with our traditional teaching methods."</p>
+                      <div class="flex items-center text-left">
+                        <div class="info p-0">
+                          <h5 class="!mb-1 text-[.9rem] !leading-[1.5]">Elena Wakatani</h5>
+                          <p class="!mb-0 text-[.8rem]">Education Program Director</p>
+                        </div>
+                      </div>
+                    </blockquote>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="xl:w-5/12 lg:w-5/12 w-full flex-[0_0_auto] px-[15px] max-w-full xl:px-[35px] lg:px-[20px] mt-[50px]">
+            <h2 class="text-[calc(1.345rem_+_1.14vw)] font-bold leading-[1.2] xl:text-[2.2rem] mb-2 xl:mt-[-1.5rem] lg:mt-[-1.5rem]">Voices from Our Community</h2>
+            <p class="lead !text-[1.05rem] !leading-[1.55] !font-normal mb-4">Our success is measured by the positive impact we create in diverse communities worldwide. Here's what our partners say about working with us.</p>
+            <p>Each project we undertake is a journey of collaboration, understanding, and innovation. We're proud to work with communities and organizations that share our vision of preserving cultural heritage while embracing technological advancement.</p>
+          </div>
+        </div>
+      </div>
+    </section>
